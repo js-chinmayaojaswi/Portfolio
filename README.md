@@ -27,7 +27,7 @@ Portfolio/
 ├── cert-gdg-hackathon.jpg         # 🚀 GDG Cepheus Hackathon
 ├── cert-ieee-technotsav.jpg       # ⚡ IEEE Technotsav 24-Hr Hackathon
 ├── cert-research-catalyst.jpg     # 🔬 Youth Research Catalyst - ME-RIISE
-├── cert-java-excelr.png           # ☕ Java Programming Fundamentals - ExcelR EdTech
+├── cert-java-excelr.jpg           # ☕ Java Programming Fundamentals - ExcelR EdTech
 ├── index.html                     # Main clean minimal portfolio entrypoint
 ├── style.css                      # Light typography, subtle cards, and lightbox styles
 ├── script.js                      # Client-side lightbox, mobile menu drawer, and clipboard copy
