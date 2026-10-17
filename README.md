@@ -28,7 +28,6 @@ Portfolio/
 ├── cert-ieee-technotsav.jpg       # ⚡ IEEE Technotsav 24-Hr Hackathon
 ├── cert-research-catalyst.jpg     # 🔬 Youth Research Catalyst - ME-RIISE
 ├── cert-java-excelr.jpg           # ☕ Java Programming Fundamentals - ExcelR EdTech
-├── cert-cbse-10th.jpg             # 🎓 Secondary School Examination (Class X) - CBSE
 ├── index.html                     # Main clean minimal portfolio entrypoint
 ├── style.css                      # Light typography, subtle cards, and lightbox styles
 ├── script.js                      # Client-side lightbox, mobile menu drawer, and clipboard copy
