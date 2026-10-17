@@ -64,6 +64,11 @@ function toggleTheme() {
   applyTheme(next);
 }
 
+// Expose globally for inline event handlers
+window.getActiveTheme = getActiveTheme;
+window.applyTheme = applyTheme;
+window.toggleTheme = toggleTheme;
+
 // --------------------------------------------------------------------------
 // Page Initialization on DOMContentLoaded
 // --------------------------------------------------------------------------
