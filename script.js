@@ -1,34 +1,123 @@
 // ==========================================================================
-// Clean Minimal Light Portfolio - Interactive Logic
+// Clean Minimal Modern Developer Portfolio - Interactive Logic
+// Theme: Full Dark & Light Mode Toggle + Recruiter-Ready UX
 // J S Chinmaya Ojaswi - CSE @ Malnad College of Engineering, Hassan
 // ==========================================================================
 
 const CHINMAYA_EMAIL = 'js.c.ojaswi01@gmail.com';
+const THEME_KEY = 'portfolio-theme';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Lucide Icons
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
-  }
+  // 1. Initialize Theme Switcher (Dark / Light)
+  initThemeToggle();
 
-  // 2. Set current year in footer
+  // 2. Initialize Lucide Icons
+  renderIcons();
+
+  // 3. Set current year in footer
   const yearSpan = document.getElementById('year-span');
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 3. Initialize Mobile Menu Drawer Toggle
+  // 4. Initialize Mobile Menu Drawer
   initMobileMenu();
 
-  // 4. Initialize One-Click Email Copy Buttons
+  // 5. Initialize Clipboard Email Buttons
   initCopyEmailButtons();
 
-  // 5. Initialize Lightbox interactions
+  // 6. Initialize Certificate & Project Lightbox
   initLightbox();
 
-  // 6. Header scroll styling
-  initHeaderScroll();
+  // 7. Header scroll styling & back-to-top button
+  initScrollWatchers();
+
+  // 8. Contact form submission handler
+  initContactForm();
+
+  // 9. Resume button handler
+  initResumeButtons();
 });
+
+// --------------------------------------------------------------------------
+// Helper: Lucide Icons refresh
+// --------------------------------------------------------------------------
+function renderIcons() {
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+// --------------------------------------------------------------------------
+// Theme Toggle: Dark Mode & Light Mode
+// --------------------------------------------------------------------------
+function initThemeToggle() {
+  const toggleBtns = [
+    document.getElementById('theme-toggle-btn'),
+    document.getElementById('mobile-theme-toggle-btn')
+  ].filter(Boolean);
+
+  // Sync initial icons with active theme
+  updateThemeIcons();
+
+  toggleBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const isDark = document.documentElement.classList.contains('dark');
+      const nextTheme = isDark ? 'light' : 'dark';
+
+      if (nextTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+
+      localStorage.setItem(THEME_KEY, nextTheme);
+      updateThemeIcons();
+    });
+  });
+
+  // Listen for OS system theme changes (if user hasn't explicitly set one)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem(THEME_KEY)) {
+      if (e.matches) {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+      updateThemeIcons();
+    }
+  });
+}
+
+function updateThemeIcons() {
+  const isDark = document.documentElement.classList.contains('dark');
+  const sunIcons = document.querySelectorAll('.theme-sun-icon');
+  const moonIcons = document.querySelectorAll('.theme-moon-icon');
+  const themeLabels = document.querySelectorAll('.theme-label-text');
+
+  sunIcons.forEach(icon => {
+    if (isDark) {
+      icon.classList.remove('hidden');
+    } else {
+      icon.classList.add('hidden');
+    }
+  });
+
+  moonIcons.forEach(icon => {
+    if (isDark) {
+      icon.classList.add('hidden');
+    } else {
+      icon.classList.remove('hidden');
+    }
+  });
+
+  themeLabels.forEach(lbl => {
+    lbl.textContent = isDark ? 'Light' : 'Dark';
+  });
+
+  renderIcons();
+}
 
 // --------------------------------------------------------------------------
 // Mobile Menu Navigation Drawer
@@ -39,7 +128,8 @@ function initMobileMenu() {
 
   if (!toggleBtn || !menu) return;
 
-  toggleBtn.addEventListener('click', () => {
+  toggleBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
     menu.classList.toggle('hidden');
   });
 
@@ -50,19 +140,22 @@ function initMobileMenu() {
       menu.classList.add('hidden');
     });
   });
+
+  // Close when clicking outside
+  document.addEventListener('click', (e) => {
+    if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
+  });
 }
 
 // --------------------------------------------------------------------------
 // Copy Email to Clipboard with Toast Notification
 // --------------------------------------------------------------------------
 function initCopyEmailButtons() {
-  const copyButtons = [
-    document.getElementById('nav-copy-email-btn'),
-    document.getElementById('copy-email-bottom-btn')
-  ];
+  const copyButtons = document.querySelectorAll('.copy-email-btn');
 
   copyButtons.forEach(btn => {
-    if (!btn) return;
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       copyEmailToClipboard();
@@ -73,7 +166,7 @@ function initCopyEmailButtons() {
 function copyEmailToClipboard() {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(CHINMAYA_EMAIL)
-      .then(() => showToast('Email copied to clipboard!'))
+      .then(() => showToast('Email copied: ' + CHINMAYA_EMAIL))
       .catch(() => fallbackCopyText(CHINMAYA_EMAIL));
   } else {
     fallbackCopyText(CHINMAYA_EMAIL);
@@ -93,12 +186,12 @@ function fallbackCopyText(text) {
     const successful = document.execCommand('copy');
     document.body.removeChild(textArea);
     if (successful) {
-      showToast('Email copied to clipboard!');
+      showToast('Email copied: ' + text);
     } else {
-      showToast('Please email: ' + CHINMAYA_EMAIL);
+      showToast('Email address: ' + text);
     }
   } catch (err) {
-    showToast('Please email: ' + CHINMAYA_EMAIL);
+    showToast('Email address: ' + text);
   }
 }
 
@@ -110,15 +203,17 @@ function showToast(message) {
 
   msgEl.textContent = message;
   toast.classList.remove('hidden');
+  toast.classList.add('flex');
 
   if (toastTimer) clearTimeout(toastTimer);
   toastTimer = setTimeout(() => {
     toast.classList.add('hidden');
-  }, 2600);
+    toast.classList.remove('flex');
+  }, 2800);
 }
 
 // --------------------------------------------------------------------------
-// Lightbox Modal for Certificate Viewing
+// Lightbox Modal for Full-Resolution Image Inspection
 // --------------------------------------------------------------------------
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
@@ -139,7 +234,7 @@ function initLightbox() {
   });
 }
 
-// Global functions exposed for inline onclick handlers in index.html
+// Exposed globally for inline onclick attributes
 window.openLightbox = function(src, caption) {
   const lightbox = document.getElementById('lightbox');
   const img = document.getElementById('lightbox-img');
@@ -151,11 +246,10 @@ window.openLightbox = function(src, caption) {
   if (cap) cap.innerHTML = caption || '';
 
   lightbox.classList.remove('hidden');
+  lightbox.classList.add('flex');
   document.body.classList.add('overflow-hidden');
 
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
-  }
+  renderIcons();
 };
 
 window.closeLightbox = function() {
@@ -163,6 +257,7 @@ window.closeLightbox = function() {
   if (!lightbox) return;
 
   lightbox.classList.add('hidden');
+  lightbox.classList.remove('flex');
   document.body.classList.remove('overflow-hidden');
 
   const img = document.getElementById('lightbox-img');
@@ -170,17 +265,97 @@ window.closeLightbox = function() {
 };
 
 // --------------------------------------------------------------------------
-// Header Shadow Effect on Scroll
+// Scroll Watchers: Header Shadow & Floating Back to Top Button
 // --------------------------------------------------------------------------
-function initHeaderScroll() {
+function initScrollWatchers() {
   const header = document.querySelector('header');
-  if (!header) return;
+  const backToTopBtn = document.getElementById('back-to-top-btn');
 
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 16) {
-      header.classList.add('shadow-xs');
-    } else {
-      header.classList.remove('shadow-xs');
+    const scrollY = window.scrollY;
+
+    // Header glassmorphic elevation
+    if (header) {
+      if (scrollY > 20) {
+        header.classList.add('shadow-sm', 'backdrop-blur-md', 'bg-white/80', 'dark:bg-slate-950/80');
+      } else {
+        header.classList.remove('shadow-sm', 'backdrop-blur-md', 'bg-white/80', 'dark:bg-slate-950/80');
+      }
+    }
+
+    // Back to top floating button visibility
+    if (backToTopBtn) {
+      if (scrollY > 400) {
+        backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTopBtn.classList.add('opacity-100', 'translate-y-0');
+      } else {
+        backToTopBtn.classList.add('opacity-0', 'pointer-events-none', 'translate-y-4');
+        backToTopBtn.classList.remove('opacity-100', 'translate-y-0');
+      }
     }
   }, { passive: true });
+
+  if (backToTopBtn) {
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+}
+
+// --------------------------------------------------------------------------
+// Contact Form Handler
+// --------------------------------------------------------------------------
+function initContactForm() {
+  const form = document.getElementById('contact-form');
+  if (!form) return;
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const nameInput = document.getElementById('contact-name');
+    const emailInput = document.getElementById('contact-email');
+    const messageInput = document.getElementById('contact-message');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    if (!name || !email || !message) {
+      showToast('Please fill out all fields.');
+      return;
+    }
+
+    // Launch email client pre-filled
+    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
+    const body = encodeURIComponent(`Hi Chinmaya,\n\n${message}\n\nBest regards,\n${name}\n${email}`);
+    window.location.href = `mailto:${CHINMAYA_EMAIL}?subject=${subject}&body=${body}`;
+
+    showToast('Opening your email client to send message...');
+    form.reset();
+  });
+}
+
+// --------------------------------------------------------------------------
+// Resume Download / Request Handler
+// --------------------------------------------------------------------------
+function initResumeButtons() {
+  const resumeButtons = document.querySelectorAll('.resume-btn');
+  resumeButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // If resume.pdf exists, normal link works.
+      // Otherwise provide a smooth prompt to request directly via email.
+      fetch('./resume.pdf', { method: 'HEAD' })
+        .then(res => {
+          if (!res.ok) {
+            e.preventDefault();
+            const subject = encodeURIComponent('Resume Request — J S Chinmaya Ojaswi');
+            const body = encodeURIComponent('Hi Chinmaya,\n\nI reviewed your portfolio and would like to request a copy of your latest resume for upcoming opportunities.\n\nBest regards,');
+            window.location.href = `mailto:${CHINMAYA_EMAIL}?subject=${subject}&body=${body}`;
+            showToast('Opening email to request latest resume PDF directly!');
+          }
+        })
+        .catch(() => {
+          // Fallback if local file protocol restricts HEAD check
+        });
+    });
+  });
 }

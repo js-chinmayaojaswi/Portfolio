@@ -1,18 +1,24 @@
-# 🌐 J S Chinmaya Ojaswi &mdash; Personal Portfolio
+# 🌐 J S Chinmaya Ojaswi &mdash; Personal Developer Portfolio
 
-A fast, lightweight, and modern personal portfolio website built with a **Clean Minimal Light** design aesthetic. Personalized with Chinmaya's real academic credentials, hackathon prototypes, and verified certificates.
+A fast, lightweight, and modern developer portfolio website built with a **Clean Minimal Modern** aesthetic, complete with instantaneous **Dark Mode and Light Mode** switching. Personalized with Chinmaya's real engineering credentials, high-performance Edge AI pipelines, hackathon prototypes, and verified certificates.
 
 ---
 
 ## 🎯 Design Philosophy & Highlights
 
-- **Clean Minimal Light:** Off-white/pearl palette (`#f8fafc`), crisp charcoal typography, hairline borders, and generous whitespace.
-- **Pure Client-Side Vanilla Stack:** Built with pure HTML5, Tailwind CSS (CDN), custom CSS (`style.css`), vanilla JavaScript (`script.js`), and Lucide icons.
+- **Dual-Theme Architecture (Dark & Light):**
+  - **Dark Mode:** Deep charcoal/slate palette (`#090d16`), dark card surfaces (`#0f172a`), subtle hairline borders, crisp white text, and electric blue/cyan accents (`#38bdf8`).
+  - **Light Mode:** Off-white/pearl palette (`#f8fafc`), clean white cards, dark charcoal text (`#0f172a`), and consistent blue accents (`#0284c7`).
+  - **Zero-FOUC:** Pre-render inline script prevents theme flicker on reload.
+  - **Auto-Sync:** Persists user selection in `localStorage` and respects OS system preferences (`prefers-color-scheme`).
+- **Recruiter-Ready Technical Showcase:**
+  - Highlights the flagship **Workplace Safety Sentinel (CraftifAI PipeGen)**: 5-stage Edge AI perception pipeline with NVIDIA TensorRT FP16 acceleration (152.9 FPS, 6.54ms latency on RTX 4050 GPU).
+- **Interactive Document & Graph Lightbox:** Full-resolution modal viewer for all 8 verified credentials, pipeline IR graphs, and TensorRT benchmark reports.
+- **Pure Client-Side Vanilla Stack:** Built with pure HTML5, Tailwind CSS (CDN with `darkMode: 'class'`), custom CSS (`style.css`), vanilla JavaScript (`script.js`), and Lucide icons.
 - **Zero Build Steps:** No Node.js, Webpack, or npm required. Open `index.html` in any browser or double-click to view immediately.
-- **Interactive Certificate Lightbox:** Click any of the 8 verified credentials to inspect full-size scans with smooth zoom & ESC key support.
-- **One-Click Email Copy:** Instant clipboard copy for `js.c.ojaswi01@gmail.com` with toast confirmation.
+- **One-Click Email Copy & Direct Mail Form:** Instant clipboard copy for `js.c.ojaswi01@gmail.com` with toast feedback, plus pre-filled email client dispatch.
 - **Automated CI/CD Deployment:** GitHub Pages static deployment configured via `.github/workflows/static.yml`.
-- **Fully Responsive:** Looks sharp across mobile, tablet, and desktop screens.
+- **Fully Responsive:** Looks sharp across mobile, tablet, and widescreen desktop monitors.
 
 ---
 
@@ -22,6 +28,9 @@ A fast, lightweight, and modern personal portfolio website built with a **Clean 
 Portfolio/
 ├── .github/workflows/
 │   └── static.yml                 # Automated GitHub Pages deployment workflow
+├── project-safety-sentinel.png    # ⚡ Flagship Edge AI Workplace Safety Sentinel HUD
+├── project-pipeline-ir.png        # 🔄 CraftifAI PipeGen 5-Stage Intermediate Representation (IR) Graph
+├── project-tensorrt-speed.png     # 📊 TensorRT FP16 Speedup & Latency Benchmark Chart
 ├── cert-ignite-winner.jpg         # 🏆 Winner - Ignite Idea to Proto 2.0 Expo (AI Chat Bot)
 ├── cert-sih-infusion.png          # 🇮🇳 INFUSION 5.0 - Internal Smart India Hackathon (SIH 2026)
 ├── cert-ieee-technotsav.jpg       # ⚡ "TECHNOTSAV" 24-Hour Hackathon - IEEE CIS & VVCE
@@ -30,9 +39,9 @@ Portfolio/
 ├── cert-java-excelr.jpg           # ☕ Java Programming Fundamentals (30h) - ExcelR EdTech
 ├── cert-research-catalyst.jpg     # 🔬 Youth Research Catalyst - ME-RIISE Foundation
 ├── cert-ignite-participation.png  # 💡 Ignite Idea to Proto 2.0 Participation - ME-RIISE
-├── index.html                     # Main clean minimal portfolio entrypoint
-├── style.css                      # Light typography, subtle cards, and lightbox styles
-├── script.js                      # Client-side lightbox, mobile menu drawer, and clipboard copy
+├── index.html                     # Main clean minimal portfolio entrypoint (Dark/Light mode)
+├── style.css                      # Modern typography, dark/light variables, and lightbox styles
+├── script.js                      # Client-side theme toggle, lightbox, mobile menu, and clipboard copy
 └── README.md                      # Project documentation and deployment guide
 ```
 
