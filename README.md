@@ -9,7 +9,7 @@ A fast, lightweight, and modern personal portfolio website built with a **Clean 
 - **Clean Minimal Light:** Off-white/pearl palette (`#f8fafc`), crisp charcoal typography, hairline borders, and generous whitespace.
 - **Pure Client-Side Vanilla Stack:** Built with pure HTML5, Tailwind CSS (CDN), custom CSS (`style.css`), vanilla JavaScript (`script.js`), and Lucide icons.
 - **Zero Build Steps:** No Node.js, Webpack, or npm required. Open `index.html` in any browser or double-click to view immediately.
-- **Interactive Certificate Lightbox:** Click any of the 5 verified certificates to inspect full-size scans with smooth zoom & ESC key support.
+- **Interactive Certificate Lightbox:** Click any of the 8 verified credentials to inspect full-size scans with smooth zoom & ESC key support.
 - **One-Click Email Copy:** Instant clipboard copy for `js.c.ojaswi01@gmail.com` with toast confirmation.
 - **Automated CI/CD Deployment:** GitHub Pages static deployment configured via `.github/workflows/static.yml`.
 - **Fully Responsive:** Looks sharp across mobile, tablet, and desktop screens.
@@ -24,8 +24,11 @@ Portfolio/
 │   └── static.yml                 # Automated GitHub Pages deployment workflow
 ├── cert-ignite-winner.jpg         # 🏆 Winner - Ignite Idea to Proto 2.0 Expo (AI Chat Bot)
 ├── cert-sih-infusion.png          # 🇮🇳 INFUSION 5.0 - Internal Smart India Hackathon (SIH 2026)
-├── cert-java-excelr.jpg           # ☕ Java Programming Fundamentals - ExcelR EdTech
+├── cert-ieee-technotsav.jpg       # ⚡ "TECHNOTSAV" 24-Hour Hackathon - IEEE CIS & VVCE
 ├── cert-gdg-hackathon.jpg         # 🚀 "Cepheus" Hackathon - Google Developer Groups
+├── cert-web-dev.jpg               # 🌐 Web Development & GitHub Course - IUCEE EWB-MCE
+├── cert-java-excelr.jpg           # ☕ Java Programming Fundamentals (30h) - ExcelR EdTech
+├── cert-research-catalyst.jpg     # 🔬 Youth Research Catalyst - ME-RIISE Foundation
 ├── cert-ignite-participation.png  # 💡 Ignite Idea to Proto 2.0 Participation - ME-RIISE
 ├── index.html                     # Main clean minimal portfolio entrypoint
 ├── style.css                      # Light typography, subtle cards, and lightbox styles
