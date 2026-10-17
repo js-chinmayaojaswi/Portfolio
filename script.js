@@ -1,41 +1,126 @@
 // ==========================================================================
 // Clean Minimal Modern Developer Portfolio - Interactive Logic
-// Theme: Full Dark & Light Mode Toggle + Recruiter-Ready UX
+// Theme: Bulletproof Dark & Light Mode Switcher + Recruiter-Ready UX
 // J S Chinmaya Ojaswi - CSE @ Malnad College of Engineering, Hassan
 // ==========================================================================
 
 const CHINMAYA_EMAIL = 'js.c.ojaswi01@gmail.com';
 const THEME_KEY = 'portfolio-theme';
 
-document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Theme Switcher (Dark / Light)
-  initThemeToggle();
+// --------------------------------------------------------------------------
+// Core Theme Functions (Callable anytime)
+// --------------------------------------------------------------------------
+function getActiveTheme() {
+  const saved = localStorage.getItem(THEME_KEY);
+  if (saved === 'dark' || saved === 'light') return saved;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
 
-  // 2. Initialize Lucide Icons
+function applyTheme(themeName) {
+  const isDark = themeName === 'dark';
+  const html = document.documentElement;
+
+  if (isDark) {
+    html.classList.add('dark');
+  } else {
+    html.classList.remove('dark');
+  }
+
+  localStorage.setItem(THEME_KEY, themeName);
+
+  // Sync all theme icons and text across desktop & mobile
+  const sunIcons = document.querySelectorAll('.theme-sun-icon');
+  const moonIcons = document.querySelectorAll('.theme-moon-icon');
+  const themeLabels = document.querySelectorAll('.theme-label-text');
+  const mobileThemeIcons = document.querySelectorAll('.mobile-theme-icon');
+  const mobileThemeTexts = document.querySelectorAll('.mobile-theme-text');
+
+  sunIcons.forEach(el => {
+    if (isDark) el.classList.remove('hidden');
+    else el.classList.add('hidden');
+  });
+
+  moonIcons.forEach(el => {
+    if (isDark) el.classList.add('hidden');
+    else el.classList.remove('hidden');
+  });
+
+  themeLabels.forEach(el => {
+    el.textContent = isDark ? 'Light' : 'Dark';
+  });
+
+  mobileThemeIcons.forEach(el => {
+    el.textContent = isDark ? '☀️' : '🌙';
+  });
+
+  mobileThemeTexts.forEach(el => {
+    el.textContent = isDark ? 'Switch to Light' : 'Switch to Dark';
+  });
+}
+
+function toggleTheme() {
+  const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+}
+
+// --------------------------------------------------------------------------
+// Page Initialization on DOMContentLoaded
+// --------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Initialize Theme Switcher State
+  const initialTheme = getActiveTheme();
+  applyTheme(initialTheme);
+
+  // 2. Attach Click Listeners to Theme Toggle Buttons
+  const toggleBtn = document.getElementById('theme-toggle-btn');
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleTheme();
+    });
+  }
+
+  const mobileToggleBtn = document.getElementById('mobile-theme-toggle-btn');
+  if (mobileToggleBtn) {
+    mobileToggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleTheme();
+    });
+  }
+
+  // Listen for OS system theme changes (if user hasn't chosen manually)
+  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    if (!localStorage.getItem(THEME_KEY)) {
+      applyTheme(e.matches ? 'dark' : 'light');
+    }
+  });
+
+  // 3. Initialize Lucide Icons
   renderIcons();
 
-  // 3. Set current year in footer
+  // 4. Set current year in footer
   const yearSpan = document.getElementById('year-span');
   if (yearSpan) {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 4. Initialize Mobile Menu Drawer
+  // 5. Initialize Mobile Menu Drawer
   initMobileMenu();
 
-  // 5. Initialize Clipboard Email Buttons
+  // 6. Initialize Clipboard Email Buttons
   initCopyEmailButtons();
 
-  // 6. Initialize Certificate & Project Lightbox
+  // 7. Initialize Lightbox
   initLightbox();
 
-  // 7. Header scroll styling & back-to-top button
+  // 8. Header scroll styling & back-to-top button
   initScrollWatchers();
 
-  // 8. Contact form submission handler
+  // 9. Contact form handler
   initContactForm();
 
-  // 9. Resume button handler
+  // 10. Resume button handler
   initResumeButtons();
 });
 
@@ -46,77 +131,6 @@ function renderIcons() {
   if (window.lucide && typeof window.lucide.createIcons === 'function') {
     window.lucide.createIcons();
   }
-}
-
-// --------------------------------------------------------------------------
-// Theme Toggle: Dark Mode & Light Mode
-// --------------------------------------------------------------------------
-function initThemeToggle() {
-  const toggleBtns = [
-    document.getElementById('theme-toggle-btn'),
-    document.getElementById('mobile-theme-toggle-btn')
-  ].filter(Boolean);
-
-  // Sync initial icons with active theme
-  updateThemeIcons();
-
-  toggleBtns.forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const isDark = document.documentElement.classList.contains('dark');
-      const nextTheme = isDark ? 'light' : 'dark';
-
-      if (nextTheme === 'dark') {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-
-      localStorage.setItem(THEME_KEY, nextTheme);
-      updateThemeIcons();
-    });
-  });
-
-  // Listen for OS system theme changes (if user hasn't explicitly set one)
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem(THEME_KEY)) {
-      if (e.matches) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-      updateThemeIcons();
-    }
-  });
-}
-
-function updateThemeIcons() {
-  const isDark = document.documentElement.classList.contains('dark');
-  const sunIcons = document.querySelectorAll('.theme-sun-icon');
-  const moonIcons = document.querySelectorAll('.theme-moon-icon');
-  const themeLabels = document.querySelectorAll('.theme-label-text');
-
-  sunIcons.forEach(icon => {
-    if (isDark) {
-      icon.classList.remove('hidden');
-    } else {
-      icon.classList.add('hidden');
-    }
-  });
-
-  moonIcons.forEach(icon => {
-    if (isDark) {
-      icon.classList.add('hidden');
-    } else {
-      icon.classList.remove('hidden');
-    }
-  });
-
-  themeLabels.forEach(lbl => {
-    lbl.textContent = isDark ? 'Light' : 'Dark';
-  });
-
-  renderIcons();
 }
 
 // --------------------------------------------------------------------------
@@ -219,14 +233,12 @@ function initLightbox() {
   const lightbox = document.getElementById('lightbox');
   if (!lightbox) return;
 
-  // Click backdrop outside modal content to close
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) {
       closeLightbox();
     }
   });
 
-  // ESC key listener to close lightbox
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !lightbox.classList.contains('hidden')) {
       closeLightbox();
@@ -234,7 +246,6 @@ function initLightbox() {
   });
 }
 
-// Exposed globally for inline onclick attributes
 window.openLightbox = function(src, caption) {
   const lightbox = document.getElementById('lightbox');
   const img = document.getElementById('lightbox-img');
@@ -274,16 +285,14 @@ function initScrollWatchers() {
   window.addEventListener('scroll', () => {
     const scrollY = window.scrollY;
 
-    // Header glassmorphic elevation
     if (header) {
       if (scrollY > 20) {
-        header.classList.add('shadow-sm', 'backdrop-blur-md', 'bg-white/80', 'dark:bg-slate-950/80');
+        header.classList.add('shadow-sm', 'backdrop-blur-md');
       } else {
-        header.classList.remove('shadow-sm', 'backdrop-blur-md', 'bg-white/80', 'dark:bg-slate-950/80');
+        header.classList.remove('shadow-sm', 'backdrop-blur-md');
       }
     }
 
-    // Back to top floating button visibility
     if (backToTopBtn) {
       if (scrollY > 400) {
         backToTopBtn.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-4');
@@ -324,7 +333,6 @@ function initContactForm() {
       return;
     }
 
-    // Launch email client pre-filled
     const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
     const body = encodeURIComponent(`Hi Chinmaya,\n\n${message}\n\nBest regards,\n${name}\n${email}`);
     window.location.href = `mailto:${CHINMAYA_EMAIL}?subject=${subject}&body=${body}`;
@@ -341,8 +349,6 @@ function initResumeButtons() {
   const resumeButtons = document.querySelectorAll('.resume-btn');
   resumeButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
-      // If resume.pdf exists, normal link works.
-      // Otherwise provide a smooth prompt to request directly via email.
       fetch('./resume.pdf', { method: 'HEAD' })
         .then(res => {
           if (!res.ok) {
@@ -353,9 +359,7 @@ function initResumeButtons() {
             showToast('Opening email to request latest resume PDF directly!');
           }
         })
-        .catch(() => {
-          // Fallback if local file protocol restricts HEAD check
-        });
+        .catch(() => {});
     });
   });
 }

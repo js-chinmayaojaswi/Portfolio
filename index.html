@@ -7,12 +7,12 @@
   <meta name="description" content="Portfolio of J S Chinmaya Ojaswi — Computer Science & Engineering student at Malnad College of Engineering, Hassan. Edge Physical AI, Java OOP, TensorRT, and hackathon prototypes." />
   <meta name="author" content="J S Chinmaya Ojaswi" />
 
-  <!-- Zero-FOUC Theme Initializer -->
+  <!-- Zero-FOUC Theme Initializer (Executes synchronously before render) -->
   <script>
     (function() {
       try {
-        const savedTheme = localStorage.getItem('portfolio-theme');
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var savedTheme = localStorage.getItem('portfolio-theme');
+        var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (savedTheme === 'dark' || (!savedTheme && systemDark)) {
           document.documentElement.classList.add('dark');
         } else {
@@ -27,38 +27,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS CDN with Dark Mode Class Support -->
-  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Tailwind CSS Configuration (Must be set BEFORE cdn.tailwindcss.com script loads) -->
   <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          colors: {
-            surface: {
-              light: '#ffffff',
-              dark: '#0f172a',
-              subtleLight: '#f8fafc',
-              subtleDark: '#141e33',
+    window.tailwind = {
+      config: {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              surface: {
+                light: '#ffffff',
+                dark: '#0f172a',
+                subtleLight: '#f8fafc',
+                subtleDark: '#141e33',
+              },
+              brand: {
+                cyan: '#0284c7',
+                'cyan-dark': '#38bdf8',
+                blue: '#2563eb',
+                'blue-dark': '#60a5fa',
+              }
             },
-            accent: {
-              cyan: '#0284c7',
-              'cyan-dark': '#38bdf8',
-              blue: '#2563eb',
-              'blue-dark': '#60a5fa',
+            fontFamily: {
+              sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+              heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+              mono: ['JetBrains Mono', 'monospace'],
             }
-          },
-          fontFamily: {
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
-            heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
           }
         }
       }
     };
   </script>
+  <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Custom Stylesheet -->
+  <!-- Custom Stylesheet (with fallback variable overrides) -->
   <link rel="stylesheet" href="./style.css" />
 
   <!-- Lucide Icons -->
@@ -72,10 +74,11 @@
   <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-[#090d16]/90 backdrop-blur-md transition-colors duration-250">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo / Initials -->
+      <!-- Brand Logo / Avatar & Name -->
       <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
-        <div class="w-9 h-9 rounded-xl bg-slate-900 dark:bg-sky-500 text-white dark:text-slate-950 flex items-center justify-center font-heading font-extrabold text-sm shadow-sm group-hover:scale-105 transition duration-200">
-          CO
+        <div class="relative shrink-0">
+          <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-9 h-9 rounded-xl object-cover object-top border border-slate-200 dark:border-slate-700 shadow-xs group-hover:scale-105 transition duration-200" />
+          <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900"></span>
         </div>
         <div>
           <span class="font-heading font-bold text-sm text-slate-900 dark:text-white tracking-tight block group-hover:text-sky-600 dark:group-hover:text-sky-400 transition">
@@ -106,10 +109,18 @@
       <!-- Header Actions: Theme Toggle, Resume & Social -->
       <div class="flex items-center gap-2 sm:gap-2.5">
         
-        <!-- Theme Toggle Button (Desktop & Mobile) -->
-        <button id="theme-toggle-btn" type="button" aria-label="Toggle Dark and Light theme" class="p-2 rounded-xl text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition focus:outline-none focus:ring-2 focus:ring-sky-500/40" title="Toggle theme">
-          <i data-lucide="sun" class="w-4 h-4 theme-sun-icon hidden text-amber-400"></i>
-          <i data-lucide="moon" class="w-4 h-4 theme-moon-icon text-slate-600 dark:text-slate-300"></i>
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle-btn" type="button" aria-label="Toggle Dark and Light theme" class="px-2.5 py-1.5 rounded-xl text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-sky-500/40" title="Toggle Dark/Light Mode">
+          <!-- Sun Icon (shown in dark mode) -->
+          <svg class="w-4 h-4 text-amber-400 theme-sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <!-- Moon Icon (shown in light mode) -->
+          <svg class="w-4 h-4 text-slate-700 dark:text-slate-300 theme-moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+          <span class="text-[11px] font-mono font-medium hidden sm:inline theme-label-text">Theme</span>
         </button>
 
         <!-- Resume Download CTA -->
@@ -151,7 +162,16 @@
       <a href="#education" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Academic Timeline</a>
       <a href="#contact" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Contact</a>
       
+      <!-- Mobile Theme Toggle Row -->
       <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+        <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Theme</span>
+        <button id="mobile-theme-toggle-btn" type="button" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-xs font-mono flex items-center gap-2 text-slate-800 dark:text-slate-200">
+          <span class="mobile-theme-icon">🌙</span>
+          <span class="mobile-theme-text font-medium">Switch Theme</span>
+        </button>
+      </div>
+
+      <div class="pt-2 flex items-center justify-between">
         <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn inline-flex items-center gap-1.5 text-xs font-mono text-sky-600 dark:text-sky-400 font-medium">
           <i data-lucide="download" class="w-3.5 h-3.5"></i>
           <span>Download Resume</span>
@@ -171,12 +191,12 @@
   <!-- ======================================================================
        MAIN CONTENT CONTAINER
        ====================================================================== -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-20 sm:space-y-28">
+  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-14 space-y-20 sm:space-y-28">
 
     <!-- ====================================================================
-         HERO SECTION
+         HERO SECTION WITH OFFICIAL PROFILE PICTURE
          ==================================================================== -->
-    <section id="hero" class="space-y-8 pt-4">
+    <section id="hero" class="space-y-8 pt-2">
       
       <!-- Top Status Pill -->
       <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-mono shadow-xs">
@@ -189,45 +209,68 @@
         <span class="text-slate-500 dark:text-slate-400 text-[11px]">Hassan, Karnataka</span>
       </div>
 
-      <!-- Main Headline & Editorial Tagline -->
-      <div class="space-y-4 max-w-3xl">
-        <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-          Hi, I'm Chinmaya. <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-400 dark:via-cyan-300 dark:to-blue-400">
-            Building Edge Physical AI &amp; Intelligent Software.
-          </span>
-        </h1>
+      <!-- Main Hero Content: Bio on Left, Profile Picture on Right -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
         
-        <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-          Computer Science &amp; Engineering student at <strong class="text-slate-900 dark:text-white font-semibold">Malnad College of Engineering, Hassan</strong>. Winner of the <em>Ignite: Idea to Proto 2.0 Project Expo</em> for developing an <strong>AI Chat Bot</strong>, and engineer behind high-speed <strong>NVIDIA TensorRT edge vision perception pipelines</strong> and <strong>Smart India Hackathon (SIH 2026)</strong> prototypes.
-        </p>
-      </div>
+        <!-- Left Column: Introduction & CTAs -->
+        <div class="lg:col-span-8 space-y-4">
+          <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
+            Hi, I'm Chinmaya. <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-400 dark:via-cyan-300 dark:to-blue-400">
+              Building Edge Physical AI &amp; Intelligent Software.
+            </span>
+          </h1>
+          
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+            Computer Science &amp; Engineering student at <strong class="text-slate-900 dark:text-white font-semibold">Malnad College of Engineering, Hassan</strong>. Winner of the <em>Ignite: Idea to Proto 2.0 Project Expo</em> for developing an <strong>AI Chat Bot</strong>, and engineer behind high-speed <strong>NVIDIA TensorRT edge vision perception pipelines</strong> and <strong>Smart India Hackathon (SIH 2026)</strong> prototypes.
+          </p>
 
-      <!-- Action CTAs -->
-      <div class="flex flex-wrap items-center gap-3 pt-2">
-        <a href="#projects" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-sky-500 hover:bg-slate-800 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-medium text-xs tracking-tight shadow-sm hover:shadow transition flex items-center gap-2 group">
-          <span>Explore Featured Projects</span>
-          <i data-lucide="arrow-down" class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition"></i>
-        </a>
-        
-        <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-          <i data-lucide="download" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
-          <span>Download Resume</span>
-        </a>
+          <!-- Action CTAs -->
+          <div class="flex flex-wrap items-center gap-3 pt-3">
+            <a href="#projects" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-sky-500 hover:bg-slate-800 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-medium text-xs tracking-tight shadow-sm hover:shadow transition flex items-center gap-2 group">
+              <span>Explore Featured Projects</span>
+              <i data-lucide="arrow-down" class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition"></i>
+            </a>
+            
+            <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
+              <i data-lucide="download" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
+              <span>Download Resume</span>
+            </a>
 
-        <a href="#certificates" class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-          <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
-          <span>View 8 Credentials</span>
-        </a>
+            <a href="#certificates" class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
+              <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
+              <span>View 8 Credentials</span>
+            </a>
 
-        <button type="button" class="copy-email-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-xs font-mono border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-          <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
-          <span>Copy Email</span>
-        </button>
+            <button type="button" class="copy-email-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-xs font-mono border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
+              <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
+              <span>Copy Email</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right Column: Official Profile Photo Card -->
+        <div class="lg:col-span-4 flex flex-col items-center justify-center">
+          <div class="relative group">
+            <!-- Ambient Gradient Glow -->
+            <div class="absolute -inset-1.5 bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-500 rounded-3xl blur-lg opacity-30 dark:opacity-50 group-hover:opacity-75 transition duration-500"></div>
+            
+            <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-slate-200/90 dark:border-slate-700/90 bg-white dark:bg-slate-900 shadow-2xl p-2.5">
+              <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-52 h-60 sm:w-60 sm:h-72 object-cover object-top rounded-xl sm:rounded-2xl transition duration-300 group-hover:scale-[1.02]" />
+              
+              <!-- Floating Pill Overlay -->
+              <div class="absolute bottom-5 left-5 right-5 px-3 py-2 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/10 text-white text-center shadow-lg">
+                <span class="block text-xs font-heading font-bold tracking-tight">J S Chinmaya Ojaswi</span>
+                <span class="block text-[10px] text-sky-300 font-mono">B.E. CSE &bull; MCE Hassan</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- Refined Technical Architecture Showcase Card -->
-      <div class="pt-4">
+      <div class="pt-2">
         <div class="clean-card p-5 sm:p-6 bg-gradient-to-br from-white via-slate-50/50 to-sky-50/30 dark:from-[#0f172a] dark:via-[#111c33] dark:to-[#0c1324] border-slate-200 dark:border-slate-800/80">
           <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-slate-800/80 text-xs font-mono">
             <div class="flex items-center gap-2">
@@ -856,7 +899,6 @@
         
         <!-- Timeline Item 1: B.E. Computer Science & Engineering -->
         <div class="relative group">
-          <!-- Timeline dot -->
           <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-sky-500 flex items-center justify-center">
             <div class="w-1.5 h-1.5 rounded-full bg-sky-500"></div>
           </div>
@@ -1073,9 +1115,7 @@
     <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-slate-400">
       
       <div class="flex items-center gap-3">
-        <div class="w-7 h-7 rounded-lg bg-slate-900 dark:bg-sky-500 text-white dark:text-slate-950 flex items-center justify-center font-heading font-bold text-xs">
-          CO
-        </div>
+        <img src="./profile.jpg" alt="Chinmaya Ojaswi" class="w-7 h-7 rounded-lg object-cover object-top border border-slate-200 dark:border-slate-700" />
         <div>
           <span class="font-heading font-bold text-slate-900 dark:text-white block">J S Chinmaya Ojaswi</span>
           <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">CSE &bull; Malnad College of Engineering, Hassan</span>

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Clean Minimal Modern Developer Portfolio - Stylesheet
-   Theme: Full Dark & Light Mode Support with Electric Blue/Cyan Accents
+   Theme: Robust Dark & Light Mode Support with Electric Blue/Cyan Accents
    J S Chinmaya Ojaswi - CSE @ Malnad College of Engineering, Hassan
    ========================================================================== */
 
@@ -55,6 +55,23 @@ body {
   background-color: var(--bg-body);
   color: var(--text-main);
   overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Explicit Body & Header dark-mode rules for instant reactivity */
+html.dark body {
+  background-color: #090d16 !important;
+  color: #f8fafc !important;
+}
+
+html.dark header {
+  background-color: rgba(9, 13, 22, 0.92) !important;
+  border-color: #1e293b !important;
+}
+
+html.dark footer {
+  background-color: #090d16 !important;
+  border-color: #1e293b !important;
 }
 
 /* Card Styling */
@@ -76,12 +93,28 @@ body {
 }
 
 html.dark .clean-card {
+  background-color: #0f172a !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3), 0 1px 2px -1px rgba(0, 0, 0, 0.2);
 }
 
 html.dark .clean-card:hover {
-  border-color: #3b82f655;
-  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.6), 0 0 15px -3px rgba(14, 165, 233, 0.12);
+  border-color: #38bdf844 !important;
+  box-shadow: 0 12px 30px -8px rgba(0, 0, 0, 0.7), 0 0 20px -3px rgba(56, 189, 248, 0.15);
+}
+
+/* Form inputs in dark mode */
+html.dark input,
+html.dark textarea {
+  background-color: #141e33 !important;
+  border-color: #1e293b !important;
+  color: #f8fafc !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus {
+  border-color: #38bdf8 !important;
 }
 
 /* Interactive Navigation Links */
@@ -112,7 +145,7 @@ html.dark .clean-card:hover {
 }
 
 html.dark .glow-accent {
-  box-shadow: 0 0 40px -8px rgba(56, 189, 248, 0.22);
+  box-shadow: 0 0 40px -8px rgba(56, 189, 248, 0.25);
 }
 
 /* Scrollbars */
@@ -135,23 +168,9 @@ html.dark .glow-accent {
 
 /* Lightbox Backdrop */
 .lightbox-backdrop {
-  background-color: rgba(9, 13, 22, 0.88);
+  background-color: rgba(9, 13, 22, 0.9);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-}
-
-/* Radial decorative grid background */
-.bg-grid-pattern {
-  background-size: 32px 32px;
-  background-image: 
-    linear-gradient(to right, rgba(100, 116, 139, 0.06) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(100, 116, 139, 0.06) 1px, transparent 1px);
-}
-
-html.dark .bg-grid-pattern {
-  background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
 }
 
 /* Code badge font */

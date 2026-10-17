@@ -28,6 +28,7 @@ A fast, lightweight, and modern developer portfolio website built with a **Clean
 Portfolio/
 ├── .github/workflows/
 │   └── static.yml                 # Automated GitHub Pages deployment workflow
+├── profile.jpg                    # 👤 Official professional headshot / profile photo
 ├── project-safety-sentinel.png    # ⚡ Flagship Edge AI Workplace Safety Sentinel HUD
 ├── project-pipeline-ir.png        # 🔄 CraftifAI PipeGen 5-Stage Intermediate Representation (IR) Graph
 ├── project-tensorrt-speed.png     # 📊 TensorRT FP16 Speedup & Latency Benchmark Chart
