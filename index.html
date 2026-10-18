@@ -3,166 +3,97 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>J S Chinmaya Ojaswi | Software Developer & CSE Student</title>
-  <meta name="description" content="Portfolio of J S Chinmaya Ojaswi &mdash; Computer Science &amp; Engineering student at Malnad College of Engineering, Hassan. Java OOP, web development, AI chatbots, and hackathon prototypes." />
+  <title>J S Chinmaya Ojaswi — Computer Science &amp; Software Developer</title>
+  <meta name="description" content="Portfolio of J S Chinmaya Ojaswi — Computer Science &amp; Engineering undergraduate at Malnad College of Engineering, Hassan. Core Java, Data Structures, Conversational AI, and Hackathons." />
   <meta name="author" content="J S Chinmaya Ojaswi" />
 
-  <!-- Zero-FOUC Theme Initializer & Global Handler -->
+  <!-- Synchronous Zero-FOUC Theme Initializer -->
   <script>
     (function() {
       try {
-        var savedTheme = localStorage.getItem('portfolio-theme');
+        var saved = localStorage.getItem('portfolio-theme');
         var systemDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-        var activeTheme = (savedTheme === 'dark' || (!savedTheme && systemDark)) ? 'dark' : 'light';
-        if (activeTheme === 'dark') {
+        var isDark = saved === 'dark' || (!saved && systemDark);
+        if (isDark) {
           document.documentElement.classList.add('dark');
         } else {
           document.documentElement.classList.remove('dark');
         }
       } catch (e) {}
     })();
-
-    function updateThemeUI(isDark) {
-      var sunIcons = document.querySelectorAll('.theme-sun-icon');
-      var moonIcons = document.querySelectorAll('.theme-moon-icon');
-      var themeLabels = document.querySelectorAll('.theme-label-text');
-      var mobileThemeIcons = document.querySelectorAll('.mobile-theme-icon');
-      var mobileThemeTexts = document.querySelectorAll('.mobile-theme-text');
-
-      sunIcons.forEach(function(el) {
-        if (isDark) el.classList.remove('hidden');
-        else el.classList.add('hidden');
-      });
-
-      moonIcons.forEach(function(el) {
-        if (isDark) el.classList.add('hidden');
-        else el.classList.remove('hidden');
-      });
-
-      themeLabels.forEach(function(el) {
-        el.textContent = isDark ? 'Light' : 'Dark';
-      });
-
-      mobileThemeIcons.forEach(function(el) {
-        el.textContent = isDark ? '☀️' : '🌙';
-      });
-
-      mobileThemeTexts.forEach(function(el) {
-        el.textContent = isDark ? 'Switch to Light' : 'Switch to Dark';
-      });
-    }
-
-    function applyTheme(themeName) {
-      var isDark = themeName === 'dark';
-      var html = document.documentElement;
-      if (isDark) {
-        html.classList.add('dark');
-      } else {
-        html.classList.remove('dark');
-      }
-      try {
-        localStorage.setItem('portfolio-theme', themeName);
-      } catch(e) {}
-      updateThemeUI(isDark);
-    }
-
-    function toggleTheme() {
-      var isDark = document.documentElement.classList.contains('dark');
-      applyTheme(isDark ? 'light' : 'dark');
-    }
-
-    window.applyTheme = applyTheme;
-    window.toggleTheme = toggleTheme;
-    window.updateThemeUI = updateThemeUI;
   </script>
 
-  <!-- Google Fonts: Inter, Plus Jakarta Sans, JetBrains Mono -->
+  <!-- Typography: Inter, Plus Jakarta Sans, JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Tailwind CSS Play CDN (Must load BEFORE assigning tailwind.config) -->
+  <!-- Tailwind CSS Play CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          colors: {
-            surface: {
-              light: '#ffffff',
-              dark: '#0f172a',
-              subtleLight: '#f8fafc',
-              subtleDark: '#141e33',
-            },
-            brand: {
-              cyan: '#0284c7',
-              'cyan-dark': '#38bdf8',
-              blue: '#2563eb',
-              'blue-dark': '#60a5fa',
-            }
-          },
           fontFamily: {
             sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
             heading: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
-            mono: ['JetBrains Mono', 'monospace'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'monospace'],
+          },
+          colors: {
+            sky: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+            }
           }
         }
       }
     };
   </script>
 
-  <!-- Custom Stylesheet (with fallback variable overrides) -->
+  <!-- Custom Stylesheet -->
   <link rel="stylesheet" href="./style.css" />
-
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body class="bg-slate-50 dark:bg-[#090d16] text-slate-800 dark:text-slate-200 antialiased selection:bg-sky-500/20 selection:text-sky-600 dark:selection:text-sky-400 min-h-screen flex flex-col transition-colors duration-250">
+<body class="selection:bg-sky-500/20 selection:text-sky-600 dark:selection:text-sky-400">
 
   <!-- ======================================================================
-       NAVIGATION BAR
+       HEADER / NAVIGATION BAR
        ====================================================================== -->
-  <header class="sticky top-0 z-40 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/90 dark:bg-[#090d16]/90 backdrop-blur-md transition-colors duration-250">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-40 w-full border-b backdrop-blur-md transition-colors duration-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
       
-      <!-- Brand Logo / Avatar & Name -->
-      <a href="#hero" class="flex items-center gap-3 group focus:outline-none">
-        <div class="relative shrink-0">
-          <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-9 h-9 rounded-xl object-cover object-top border border-slate-200 dark:border-slate-700 shadow-xs group-hover:scale-105 transition duration-200" />
-          <span class="absolute -bottom-0.5 -right-0.5 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-white dark:ring-slate-900"></span>
-        </div>
-        <div>
-          <span class="font-heading font-bold text-sm text-slate-900 dark:text-white tracking-tight block group-hover:text-sky-600 dark:group-hover:text-sky-400 transition">
-            J S Chinmaya Ojaswi
+      <!-- Brand Profile -->
+      <a href="#hero" class="flex items-center gap-3 group focus-visible:ring-2 focus-visible:ring-sky-500 rounded-lg">
+        <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-8 h-8 rounded-full object-cover object-top border border-slate-300 dark:border-slate-700 shrink-0" />
+        <div class="leading-tight">
+          <span class="font-heading font-semibold text-sm text-slate-900 dark:text-white block group-hover:text-sky-600 dark:group-hover:text-sky-400 transition">
+            Chinmaya Ojaswi
           </span>
-          <span class="block text-[10px] text-slate-500 dark:text-slate-400 font-mono tracking-wider -mt-0.5">
-            CSE &bull; MCE HASSAN
+          <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">
+            MCE Hassan &bull; CSE
           </span>
         </div>
       </a>
 
       <!-- Desktop Navigation Links -->
       <nav class="hidden md:flex items-center gap-6 text-xs font-medium text-slate-600 dark:text-slate-400">
-        <a href="#about" class="clean-link hover:text-slate-900 dark:hover:text-white transition">About</a>
-        <a href="#skills" class="clean-link hover:text-slate-900 dark:hover:text-white transition">Skills</a>
-        <a href="#projects" class="clean-link hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1.5">
-          <span>Projects</span>
-          <span class="px-1.5 py-0.2 rounded-full text-[9px] font-mono bg-sky-100 dark:bg-sky-950 text-sky-700 dark:text-sky-400 border border-sky-200 dark:border-sky-800">New</span>
+        <a href="#about" class="nav-link hover:text-slate-900 dark:hover:text-white transition">About</a>
+        <a href="#projects" class="nav-link hover:text-slate-900 dark:hover:text-white transition">Projects</a>
+        <a href="#certificates" class="nav-link hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1.5">
+          <span>Credentials</span>
+          <span class="px-1.5 py-0.5 rounded text-[10px] font-mono bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 border border-slate-200 dark:border-slate-700">8</span>
         </a>
-        <a href="#certificates" class="clean-link hover:text-slate-900 dark:hover:text-white transition flex items-center gap-1">
-          <span>Certificates</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>
-        </a>
-        <a href="#education" class="clean-link hover:text-slate-900 dark:hover:text-white transition">Timeline</a>
-        <a href="#contact" class="clean-link hover:text-slate-900 dark:hover:text-white transition">Contact</a>
+        <a href="#skills" class="nav-link hover:text-slate-900 dark:hover:text-white transition">Skills</a>
+        <a href="#timeline" class="nav-link hover:text-slate-900 dark:hover:text-white transition">Timeline</a>
+        <a href="#contact" class="nav-link hover:text-slate-900 dark:hover:text-white transition">Contact</a>
       </nav>
 
-      <!-- Header Actions: Theme Toggle, Resume & Social -->
-      <div class="flex items-center gap-1.5 sm:gap-2">
+      <!-- Action Items: Theme Toggle, Social & Resume -->
+      <div class="flex items-center gap-2">
         
-        <!-- Theme Toggle Button -->
-        <button id="theme-toggle-btn" type="button" onclick="toggleTheme()" aria-label="Toggle Dark and Light theme" class="px-2.5 py-1.5 rounded-xl text-slate-700 dark:text-slate-200 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center gap-1.5 focus:outline-none focus:ring-2 focus:ring-sky-500/40" title="Toggle Dark/Light Mode">
+        <!-- Theme Switcher Button -->
+        <button id="theme-toggle-btn" type="button" onclick="toggleTheme()" aria-label="Toggle Theme" class="p-2 rounded-lg text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center" title="Switch dark/light theme">
           <!-- Sun Icon (shown in dark mode) -->
           <svg class="w-4 h-4 text-amber-400 theme-sun-icon hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
             <circle cx="12" cy="12" r="4"></circle>
@@ -170,80 +101,61 @@
           </svg>
           <!-- Moon Icon (shown in light mode) -->
           <svg class="w-4 h-4 text-slate-700 dark:text-slate-300 theme-moon-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
-            <path d="M12 3a6 6 0 0 0 9 9 9 0 1 1-9-9Z"></path>
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
           </svg>
-          <span class="text-[11px] font-mono font-medium hidden sm:inline theme-label-text">Theme</span>
         </button>
 
-        <!-- Resume Download CTA -->
-        <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-mono font-medium border border-slate-200 dark:border-slate-700 transition" title="Download Resume">
-          <i data-lucide="download" class="w-3.5 h-3.5 text-sky-600 dark:text-sky-400"></i>
-          <span>Resume</span>
-        </a>
-
-        <!-- GitHub Profile (Official Logo) -->
-        <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl text-slate-800 dark:text-slate-200 hover:text-black dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center shadow-xs" title="GitHub Profile (@js-chinmayaojaswi)" aria-label="GitHub Profile">
+        <!-- GitHub Profile -->
+        <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center" title="GitHub (@js-chinmayaojaswi)" aria-label="GitHub Profile">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
           </svg>
         </a>
 
-        <!-- LinkedIn Profile (Official Logo) -->
-        <a href="https://www.linkedin.com/in/j-s-chinmaya-ojaswi-103889364" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl text-[#0a66c2] dark:text-[#38bdf8] hover:text-[#004182] dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center shadow-xs" title="LinkedIn Profile (J S Chinmaya Ojaswi)" aria-label="LinkedIn Profile">
+        <!-- LinkedIn Profile -->
+        <a href="https://www.linkedin.com/in/j-s-chinmaya-ojaswi-103889364" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg text-[#0a66c2] dark:text-[#38bdf8] hover:text-[#004182] dark:hover:text-white bg-slate-100 dark:bg-slate-800 hover:bg-sky-50 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center" title="LinkedIn (J S Chinmaya Ojaswi)" aria-label="LinkedIn Profile">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
             <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54A1.53 1.53 0 0 0 6.46 5.7a1.54 1.54 0 0 0-1.54 1.52c0 .85.7 1.54 1.54 1.54M7.83 18.5v-8.37H5.08v8.37h2.75z"></path>
           </svg>
         </a>
 
-        <!-- Mobile Menu Toggle Button -->
-        <button id="mobile-toggle-btn" type="button" aria-label="Open mobile navigation" class="md:hidden p-2 rounded-xl text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition">
-          <i data-lucide="menu" class="w-5 h-5"></i>
-        </button>
-      </div>
+        <!-- Resume Download CTA -->
+        <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-slate-100 hover:bg-slate-800 dark:hover:bg-white text-white dark:text-slate-950 text-xs font-medium transition" title="Download Resume">
+          <span>Resume</span>
+          <span class="text-[10px] font-mono opacity-70">&darr;</span>
+        </a>
 
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-toggle-btn" type="button" aria-label="Open mobile navigation" class="md:hidden p-2 rounded-lg text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+          </svg>
+        </button>
+
+      </div>
     </div>
 
-    <!-- Mobile Dropdown Menu -->
-    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] px-6 py-4 space-y-3 text-xs font-medium text-slate-700 dark:text-slate-300 transition-colors">
-      <a href="#about" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">About Profile</a>
-      <a href="#skills" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Skills &amp; Capabilities</a>
-      <a href="#projects" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400 flex items-center justify-between">
-        <span>Featured Projects</span>
-        <span class="px-2 py-0.5 rounded text-[10px] font-mono bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400">Featured</span>
+    <!-- Mobile Dropdown Menu Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#111723] px-5 py-4 space-y-3 text-xs font-medium text-slate-700 dark:text-slate-300">
+      <a href="#about" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400">About</a>
+      <a href="#projects" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Featured Projects</a>
+      <a href="#certificates" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400 flex items-center justify-between">
+        <span>Verified Credentials</span>
+        <span class="font-mono text-[10px] text-slate-500">8 Official</span>
       </a>
-      <a href="#certificates" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400 flex items-center justify-between">
-        <span>Verified Certificates</span>
-        <span class="font-mono text-[10px] text-amber-600 dark:text-amber-400">8 Credentials</span>
-      </a>
-      <a href="#education" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Academic Timeline</a>
-      <a href="#contact" class="block py-1.5 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Contact</a>
+      <a href="#skills" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Skills &amp; Tooling</a>
+      <a href="#timeline" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Education Timeline</a>
+      <a href="#contact" class="block py-1 mobile-link hover:text-sky-600 dark:hover:text-sky-400">Contact</a>
       
-      <!-- Mobile Theme Toggle Row -->
-      <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
-        <span class="text-xs font-mono text-slate-500 dark:text-slate-400">Theme</span>
-        <button id="mobile-theme-toggle-btn" type="button" onclick="toggleTheme()" class="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-xs font-mono flex items-center gap-2 text-slate-800 dark:text-slate-200">
-          <span class="mobile-theme-icon">🌙</span>
-          <span class="mobile-theme-text font-medium">Switch Theme</span>
-        </button>
-      </div>
-
-      <div class="pt-2 flex items-center justify-between">
-        <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn inline-flex items-center gap-1.5 text-xs font-mono text-sky-600 dark:text-sky-400 font-medium">
-          <i data-lucide="download" class="w-3.5 h-3.5"></i>
-          <span>Download Resume</span>
+      <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn inline-flex items-center gap-1.5 text-xs text-sky-600 dark:text-sky-400 font-medium">
+          <span>Download Resume PDF</span>
+          <span>&darr;</span>
         </a>
-        <div class="flex items-center gap-2">
-          <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:text-black dark:hover:text-white border border-slate-200 dark:border-slate-700 flex items-center justify-center" title="GitHub Profile">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
-            </svg>
-          </a>
-          <a href="https://www.linkedin.com/in/j-s-chinmaya-ojaswi-103889364" target="_blank" rel="noopener noreferrer" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-[#0a66c2] dark:text-[#38bdf8] hover:text-[#004182] dark:hover:text-white border border-slate-200 dark:border-slate-700 flex items-center justify-center" title="LinkedIn Profile">
-            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54A1.53 1.53 0 0 0 6.46 5.7a1.54 1.54 0 0 0-1.54 1.52c0 .85.7 1.54 1.54 1.54M7.83 18.5v-8.37H5.08v8.37h2.75z"></path>
-            </svg>
-          </a>
-        </div>
+        <button id="mobile-theme-toggle-btn" type="button" onclick="toggleTheme()" class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 text-[11px] font-mono text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700">
+          <span class="mobile-theme-icon">🌙</span>
+          <span class="mobile-theme-text ml-1">Theme</span>
+        </button>
       </div>
     </div>
   </header>
@@ -251,939 +163,909 @@
   <!-- ======================================================================
        MAIN CONTENT CONTAINER
        ====================================================================== -->
-  <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8 sm:py-14 space-y-20 sm:space-y-28">
+  <main class="max-w-5xl w-full mx-auto px-4 sm:px-6 py-10 sm:py-16 space-y-20 sm:space-y-24">
 
     <!-- ====================================================================
-         HERO SECTION WITH OFFICIAL PROFILE PICTURE
+         HERO SECTION: AUTHENTIC, HUMAN DEVELOPER INTRODUCTION
          ==================================================================== -->
-    <section id="hero" class="space-y-8 pt-2">
+    <section id="hero" class="space-y-8">
       
-      <!-- Top Status Pill -->
-      <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs font-mono shadow-xs">
-        <span class="relative flex h-2 w-2">
-          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-          <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-        </span>
-        <span class="text-slate-700 dark:text-slate-300 font-medium">Available for Software Engineering Internships</span>
-        <span class="text-slate-300 dark:text-slate-700">&bull;</span>
-        <span class="text-slate-500 dark:text-slate-400 text-[11px]">Hassan, Karnataka</span>
-      </div>
-
-      <!-- Main Hero Content: Bio on Left, Profile Picture on Right -->
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-start">
         
-        <!-- Left Column: Introduction & CTAs -->
-        <div class="lg:col-span-8 space-y-4">
-          <h1 class="font-heading text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-[1.12]">
-            Hi, I'm Chinmaya. <br />
-            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-indigo-600 dark:from-sky-400 dark:via-cyan-300 dark:to-blue-400">
-              Building software with clarity, precision &amp; curiosity.
+        <!-- Left: Bio & Immediate Context -->
+        <div class="md:col-span-8 space-y-5">
+          
+          <!-- Location & Status Badge -->
+          <div class="inline-flex items-center gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Hassan, Karnataka</span>
+            <span class="text-slate-400 dark:text-slate-600">&bull;</span>
+            <span>Malnad College of Engineering (VTU)</span>
+          </div>
+
+          <!-- Main Heading -->
+          <h1 class="font-heading text-3xl sm:text-5xl font-bold tracking-tight text-slate-900 dark:text-white leading-[1.18]">
+            Hi, I'm Chinmaya. <br class="hidden sm:inline" />
+            <span class="text-slate-700 dark:text-slate-300 font-normal">
+              I build software with core Java, algorithms &amp; modern web tools.
             </span>
           </h1>
-          
-          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-            Computer Science &amp; Engineering student at <strong class="text-slate-900 dark:text-white font-semibold">Malnad College of Engineering, Hassan</strong>. Winner of the <em>Ignite: Idea to Proto 2.0 Project Expo</em> for developing an <strong>AI Chat Bot</strong>, and active builder across Google Developer Groups, IEEE hackathons, and the <strong>Smart India Hackathon (SIH 2026)</strong>.
+
+          <!-- Authentic Narrative Paragraph -->
+          <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 leading-relaxed max-w-2xl">
+            I am a 2nd year (3rd semester) Computer Science &amp; Engineering undergraduate at <strong class="text-slate-900 dark:text-white font-medium">Malnad College of Engineering, Hassan</strong>. Winner of the <em>Ignite: Idea to Proto 2.0 Project Expo</em> for building an intelligent conversational assistant, and an active participant across competitive collegiate hackathons including the <strong>Smart India Hackathon (SIH 2026)</strong>, <strong>IEEE CIS Technotsav</strong>, and <strong>Google Developer Groups</strong>.
           </p>
 
-          <!-- Action CTAs -->
-          <div class="flex flex-wrap items-center gap-3 pt-3">
-            <a href="#projects" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-sky-500 hover:bg-slate-800 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-medium text-xs tracking-tight shadow-sm hover:shadow transition flex items-center gap-2 group">
-              <span>Explore Featured Projects</span>
-              <i data-lucide="arrow-down" class="w-3.5 h-3.5 group-hover:translate-y-0.5 transition"></i>
-            </a>
-            
-            <a href="./resume.pdf" download="Chinmaya_Ojaswi_Resume.pdf" class="resume-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-              <i data-lucide="download" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
-              <span>Download Resume</span>
+          <!-- Primary Actions -->
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <a href="#projects" class="px-4 py-2 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-medium hover:bg-slate-800 dark:hover:bg-slate-100 transition inline-flex items-center gap-1.5">
+              <span>View Projects</span>
+              <span class="text-[11px]">&darr;</span>
             </a>
 
-            <a href="#certificates" class="px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-medium text-xs tracking-tight border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-              <i data-lucide="award" class="w-4 h-4 text-amber-500"></i>
-              <span>View 8 Credentials</span>
+            <a href="#certificates" class="px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 text-xs font-medium hover:bg-slate-100 dark:hover:bg-slate-800 transition inline-flex items-center gap-1.5">
+              <span>8 Verified Credentials</span>
+              <span class="text-[11px] text-amber-500">&bull;</span>
             </a>
 
-            <button type="button" class="copy-email-btn px-4 py-2.5 rounded-xl bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 font-medium text-xs font-mono border border-slate-200 dark:border-slate-800 shadow-xs transition flex items-center gap-2">
-              <i data-lucide="copy" class="w-3.5 h-3.5 text-slate-400"></i>
+            <button type="button" class="copy-email-btn px-3.5 py-2 rounded-lg border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs font-mono hover:bg-slate-100 dark:hover:bg-slate-800 transition inline-flex items-center gap-1.5" title="Copy email address to clipboard">
+              <svg class="w-3.5 h-3.5 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                <rect width="14" height="14" x="8" y="8" rx="2" ry="2"></rect>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+              </svg>
               <span>Copy Email</span>
             </button>
           </div>
+
         </div>
 
-        <!-- Right Column: Official Profile Photo Card -->
-        <div class="lg:col-span-4 flex flex-col items-center justify-center">
-          <div class="relative group">
-            <!-- Ambient Gradient Glow -->
-            <div class="absolute -inset-1.5 bg-gradient-to-tr from-sky-500 via-blue-600 to-indigo-500 rounded-3xl blur-lg opacity-30 dark:opacity-50 group-hover:opacity-75 transition duration-500"></div>
-            
-            <div class="relative rounded-2xl sm:rounded-3xl overflow-hidden border-2 border-slate-200/90 dark:border-slate-700/90 bg-white dark:bg-slate-900 shadow-2xl p-2.5">
-              <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-52 h-60 sm:w-60 sm:h-72 object-cover object-top rounded-xl sm:rounded-2xl transition duration-300 group-hover:scale-[1.02]" />
-              
-              <!-- Floating Pill Overlay -->
-              <div class="absolute bottom-5 left-5 right-5 px-3 py-2 rounded-xl bg-slate-950/85 backdrop-blur-md border border-white/10 text-white text-center shadow-lg">
-                <span class="block text-xs font-heading font-bold tracking-tight">J S Chinmaya Ojaswi</span>
-                <span class="block text-[10px] text-sky-300 font-mono">B.E. CSE &bull; MCE Hassan</span>
-              </div>
+        <!-- Right: Professional Headshot (Clean Human Editorial Framing) -->
+        <div class="md:col-span-4 flex flex-col items-start md:items-end">
+          <div class="w-48 sm:w-56 rounded-xl overflow-hidden border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-900 p-2 shadow-xs">
+            <img src="./profile.jpg" alt="J S Chinmaya Ojaswi" class="w-full h-56 sm:h-64 object-cover object-top rounded-lg" />
+            <div class="pt-2 text-center">
+              <span class="block text-xs font-heading font-semibold text-slate-900 dark:text-white">J S Chinmaya Ojaswi</span>
+              <span class="block text-[11px] text-slate-500 dark:text-slate-400 font-mono">B.E. CSE &bull; Hassan, India</span>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!-- Refined Core Engineering Profile Card -->
-      <div class="pt-2">
-        <div class="clean-card p-5 sm:p-6 bg-gradient-to-br from-white via-slate-50/50 to-sky-50/30 dark:from-[#0f172a] dark:via-[#111c33] dark:to-[#0c1324] border-slate-200 dark:border-slate-800/80">
-          <div class="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-200/80 dark:border-slate-800/80 text-xs font-mono">
-            <div class="flex items-center gap-2">
-              <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-              <span class="text-slate-900 dark:text-white font-semibold">CORE ENGINEERING PROFILE</span>
-              <span class="text-slate-400 dark:text-slate-600">/</span>
-              <span class="text-sky-600 dark:text-sky-400 font-mono text-[11px]">Computer Science &amp; Engineering</span>
-            </div>
-            <span class="text-slate-500 dark:text-slate-400 text-[11px]">Malnad College of Engineering, Hassan (VTU)</span>
-          </div>
-
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 text-left">
-            <div class="space-y-1">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Core Languages</span>
-              <div class="font-heading font-bold text-lg sm:text-xl text-slate-900 dark:text-white">Java &bull; C &bull; Python</div>
-              <span class="text-[11px] text-indigo-600 dark:text-indigo-400 font-mono block">Certified Java OOP (30h)</span>
-            </div>
-            <div class="space-y-1">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Award Recognition</span>
-              <div class="font-heading font-bold text-lg sm:text-xl text-amber-600 dark:text-amber-400">🏆 Expo Winner</div>
-              <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">Ignite 2.0 (AI Chat Bot)</span>
-            </div>
-            <div class="space-y-1">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Hackathons</span>
-              <div class="font-heading font-bold text-lg sm:text-xl text-sky-600 dark:text-sky-400">SIH &bull; IEEE &bull; GDG</div>
-              <span class="text-[11px] text-slate-500 dark:text-slate-400 font-mono block">Rapid Prototyping</span>
-            </div>
-            <div class="space-y-1">
-              <span class="text-[10px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider block">Verified Credentials</span>
-              <div class="font-heading font-bold text-lg sm:text-xl text-slate-900 dark:text-white">8 Certificates</div>
-              <span class="text-[11px] text-emerald-600 dark:text-emerald-400 font-mono block">Verified Official Scans</span>
-            </div>
-          </div>
+      <!-- Quick Context Stat Ribbon (Minimalist, Non-repetitive) -->
+      <div class="editorial-card p-4 sm:p-5 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs font-mono">
+        <div class="space-y-0.5">
+          <span class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-wider block">Degree &bull; Year</span>
+          <span class="font-semibold text-slate-900 dark:text-white block font-sans text-sm">B.E. CSE (3rd Sem)</span>
+          <span class="text-slate-500 text-[11px] block">2025 &ndash; 2029 Cohort</span>
+        </div>
+        <div class="space-y-0.5">
+          <span class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-wider block">Institution</span>
+          <span class="font-semibold text-slate-900 dark:text-white block font-sans text-sm">MCE Hassan</span>
+          <span class="text-slate-500 text-[11px] block">Autonomous, VTU</span>
+        </div>
+        <div class="space-y-0.5">
+          <span class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-wider block">Recognition</span>
+          <span class="font-semibold text-amber-600 dark:text-amber-400 block font-sans text-sm">🏆 Expo Winner</span>
+          <span class="text-slate-500 text-[11px] block">Ignite 2.0 (AI Chat Bot)</span>
+        </div>
+        <div class="space-y-0.5">
+          <span class="text-slate-400 dark:text-slate-500 text-[10px] uppercase tracking-wider block">Hackathons</span>
+          <span class="font-semibold text-slate-900 dark:text-white block font-sans text-sm">SIH &bull; IEEE &bull; GDG</span>
+          <span class="text-slate-500 text-[11px] block">4 Verified Sprints</span>
         </div>
       </div>
 
     </section>
 
     <!-- ====================================================================
-         ABOUT SECTION
+         ABOUT SECTION: CANDID, REAL HUMAN PERSPECTIVE
          ==================================================================== -->
     <section id="about" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">01 / Profile</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">Hassan, Karnataka</span>
+      
+      <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span class="font-semibold uppercase tracking-wider">About Me</span>
+        <span>Background &amp; Philosophy</span>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-10">
+        
         <div class="md:col-span-5 space-y-3">
-          <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight leading-snug">
-            Curious learner, systems builder &amp; competitive hackathon engineer.
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Curious about how software behaves under the hood.
           </h2>
-          <p class="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-            Dedicated to strong programmatic foundations, clean architecture, low-latency acceleration, and rapid prototyping under pressure.
+          <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed">
+            From foundational data structures in C and Java to conversational interfaces and hackathon sprints.
           </p>
         </div>
 
         <div class="md:col-span-7 space-y-4 text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
           <p>
-            I am currently in my <strong>2nd year (3rd semester)</strong> of Computer Science &amp; Engineering at <strong>Malnad College of Engineering, Hassan</strong>. My engineering focus combines foundational computer science principles—Data Structures &amp; Algorithms, Object-Oriented Programming (Java), and C programming—with modern web technologies, conversational AI, and collaborative software engineering.
+            I am an undergraduate student at Malnad College of Engineering in Hassan, Karnataka. Rather than jumping straight into framework buzzwords, I have spent significant time developing solid programmatic fundamentals: memory layouts, algorithm time complexities, pointer semantics in C, and rigorous Object-Oriented design patterns in Java (certified through a 30-hour intensive live program with ExcelR EdTech).
           </p>
           <p>
-            I thrive in competitive hackathons and engineering expos. My AI conversational assistant earned the <strong>Winner</strong> award at the <em>Ignite: Idea to Proto 2.0 Project Expo</em> organized by ME-RIISE Foundation at MCE Hassan. I have also built collaborative prototypes under <strong>Google Developer Groups (GDG) On Campus Atria IT</strong>, the <strong>Smart India Hackathon (SIH 2026 &mdash; INFUSION 5.0)</strong>, and the <strong>IEEE CIS TECHNOTSAV 24-Hour Hackathon</strong>.
+            Hackathons have been my primary training ground for shipping real code under pressure. Whether it was leading our conversational assistant to first place at the <strong>Ignite 2.0 Project Expo</strong>, engineering solutions for the internal <strong>Smart India Hackathon (INFUSION 5.0)</strong>, or building prototypes in 24-hour sprints with <strong>IEEE CIS</strong> and <strong>Google Developer Groups</strong>, I enjoy turning practical ideas into working code that judges and users can interact with.
           </p>
-
-          <!-- Quick Metric Badges -->
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2 text-xs font-mono">
-            <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-              <span class="text-slate-400 dark:text-slate-500 block text-[10px]">DEGREE &amp; YEAR</span>
-              <span class="text-slate-900 dark:text-white font-medium">B.E. CSE (3rd Sem)</span>
-            </div>
-            <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs">
-              <span class="text-slate-400 dark:text-slate-500 block text-[10px]">COLLEGE</span>
-              <span class="text-slate-900 dark:text-white font-medium">MCE Hassan (VTU)</span>
-            </div>
-            <div class="p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-xs col-span-2 sm:col-span-1">
-              <span class="text-slate-400 dark:text-slate-500 block text-[10px]">VERIFIED CREDENTIALS</span>
-              <span class="text-sky-600 dark:text-sky-400 font-medium">8 Certificates</span>
-            </div>
-          </div>
+          <p>
+            When I'm not writing code or working on course assignments, you'll find me exploring web APIs, participating in campus developer student chapters, and refining my problem-solving skills on core data structures.
+          </p>
         </div>
+
       </div>
+
     </section>
 
     <!-- ====================================================================
-         SKILLS & CAPABILITIES SECTION
+         FEATURED PROJECTS SECTION: ENGINEERING CASE STUDIES
          ==================================================================== -->
-    <section id="skills" class="space-y-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">02 / Capabilities</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">Technical Expertise</span>
+    <section id="projects" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span class="font-semibold uppercase tracking-wider">Featured Projects</span>
+        <span>Hackathon &amp; Expo Builds</span>
       </div>
 
-      <div class="space-y-2">
-        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-          Skills &amp; Technology Stack
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          Core competencies spanning systems programming, conversational AI, web development, and developer tooling.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div class="space-y-5">
         
-        <!-- Skill Column 1: Programming Languages -->
-        <div class="clean-card p-5 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-            <i data-lucide="code-2" class="w-4 h-4 text-sky-600 dark:text-sky-400"></i>
-            <span>LANGUAGES</span>
-          </div>
-          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">C Programming</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Proficient</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Java (OOP)</span>
-              <span class="text-indigo-600 dark:text-indigo-400 font-mono text-[11px] font-medium">Certified (30h)</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Python</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Intermediate</span>
-            </li>
-            <li class="flex items-center justify-between">
-              <span class="font-medium text-slate-900 dark:text-white">JavaScript (ES6+)</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Intermediate</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Skill Column 2: Domains & Focus -->
-        <div class="clean-card p-5 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-            <i data-lucide="sparkles" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
-            <span>DOMAINS &amp; FOCUS</span>
-          </div>
-          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">AI Chatbots</span>
-              <span class="text-amber-600 dark:text-amber-400 font-mono text-[11px] font-medium">Expo Winner</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Data Structures (DSA)</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Active</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Hackathon Sprints</span>
-              <span class="text-violet-600 dark:text-violet-400 font-mono text-[11px] font-medium">SIH, IEEE, GDG</span>
-            </li>
-            <li class="flex items-center justify-between">
-              <span class="font-medium text-slate-900 dark:text-white">Problem Solving</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Daily Practice</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Skill Column 3: Web & Tools -->
-        <div class="clean-card p-5 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-            <i data-lucide="globe" class="w-4 h-4 text-teal-600 dark:text-teal-400"></i>
-            <span>WEB &amp; TOOLS</span>
-          </div>
-          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">HTML5 &amp; CSS3</span>
-              <span class="text-teal-600 dark:text-teal-400 font-mono text-[11px] font-medium">Certified (IUCEE)</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Git &amp; GitHub</span>
-              <span class="text-teal-600 dark:text-teal-400 font-mono text-[11px] font-medium">Certified (IUCEE)</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Tailwind CSS</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Proficient</span>
-            </li>
-            <li class="flex items-center justify-between">
-              <span class="font-medium text-slate-900 dark:text-white">REST APIs</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Familiar</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Skill Column 4: Environments & Tools -->
-        <div class="clean-card p-5 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="flex items-center gap-2 text-xs font-mono text-slate-500 dark:text-slate-400 font-semibold uppercase tracking-wider">
-            <i data-lucide="terminal" class="w-4 h-4 text-violet-600 dark:text-violet-400"></i>
-            <span>TOOLS &amp; WORKFLOW</span>
-          </div>
-          <ul class="space-y-2.5 text-xs text-slate-700 dark:text-slate-300">
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">VS Code &amp; IntelliJ</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Primary IDEs</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">Linux &amp; Bash CLI</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Scripting</span>
-            </li>
-            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
-              <span class="font-medium text-slate-900 dark:text-white">GitHub Pages CI/CD</span>
-              <span class="text-slate-500 dark:text-slate-400 font-mono text-[11px]">Automated</span>
-            </li>
-            <li class="flex items-center justify-between">
-              <span class="font-medium text-slate-900 dark:text-white">Hackathon Sprints</span>
-              <span class="text-violet-600 dark:text-violet-400 font-mono text-[11px] font-medium">SIH, IEEE, GDG</span>
-            </li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         FEATURED PROJECTS SECTION
-         ==================================================================== -->
-    <section id="projects" class="space-y-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">03 / Selected Work</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">2025 &ndash; 2026</span>
-      </div>
-
-      <div class="space-y-2">
-        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-          Featured Engineering Projects
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          High-performance edge AI pipelines, expo-winning conversational systems, and national hackathon solutions.
-        </p>
-      </div>
-
-      <div class="space-y-8">
-        
-        <!-- PROJECT 1: AI Chat Bot (Award Winner Ignite 2.0) -->
-        <article class="clean-card p-6 sm:p-8 space-y-4 bg-gradient-to-br from-amber-50/25 via-white to-white dark:from-amber-950/20 dark:via-slate-900 dark:to-slate-900 border-amber-200 dark:border-amber-900/40">
+        <!-- PROJECT 1: AI Chat Bot (Winner Ignite 2.0) -->
+        <article class="editorial-card p-6 sm:p-7 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <span class="text-xs font-mono text-amber-800 dark:text-amber-300 font-semibold px-2.5 py-0.5 rounded-full bg-amber-100 dark:bg-amber-950 border border-amber-300 dark:border-amber-800">
+              <span class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
                 🏆 EXPO WINNER
               </span>
-              <h3 class="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">AI Chat Bot &mdash; Ignite 2.0</h3>
+              <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">
+                AI Chat Bot &mdash; Ignite 2.0
+              </h3>
             </div>
             <span class="text-xs font-mono text-slate-500 dark:text-slate-400">December 2025</span>
           </div>
 
           <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Emerged as the <strong>Winner</strong> in <em>"IGNITE: IDEA TO PROTO 2.0"</em> Project Expo organized by the ME-RIISE Foundation at Malnad College of Engineering, Hassan. Built an intelligent conversational assistant to resolve queries and streamline interactive student assistance.
+            Earned <strong>Winner (1st Place)</strong> recognition in the <em>IGNITE: IDEA TO PROTO 2.0 Project Expo</em> organized by the ME-RIISE Foundation at Malnad College of Engineering, Hassan. Engineered an interactive conversational assistant designed to parse inquiries and deliver direct, context-aware student support in real time.
           </p>
 
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-300">
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Artificial Intelligence</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Python</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Conversational UI</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">ME-RIISE Foundation</span>
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Conversational AI</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Python</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Interactive UI</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">ME-RIISE Foundation</span>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <button type="button" onclick="openLightbox('./cert-ignite-winner.jpg', 'Winner &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (AI Chat Bot)')" class="text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-300 font-medium flex items-center gap-1.5 transition">
-              <i data-lucide="award" class="w-4 h-4"></i>
+          <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-medium">
+            <button type="button" onclick="openLightbox('./cert-ignite-winner.jpg', 'Winner &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (AI Chat Bot)')" class="text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
               <span>View Official Award Certificate</span>
+              <span class="text-[11px]">&rarr;</span>
             </button>
-            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition font-medium">
-              <i data-lucide="github" class="w-4 h-4"></i>
+            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition inline-flex items-center gap-1">
               <span>GitHub</span>
+              <span class="text-[10px]">&nearr;</span>
             </a>
           </div>
         </article>
 
-        <!-- PROJECT 2: INFUSION 5.0 - Internal Smart India Hackathon 2026 -->
-        <article class="clean-card p-6 sm:p-8 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+        <!-- PROJECT 2: INFUSION 5.0 (SIH 2026) -->
+        <article class="editorial-card p-6 sm:p-7 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <span class="text-xs font-mono text-emerald-800 dark:text-emerald-300 font-semibold px-2.5 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-950 border border-emerald-200 dark:border-emerald-800">
+              <span class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-emerald-50 dark:bg-emerald-950/80 text-emerald-800 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800">
                 🇮🇳 SIH 2026
               </span>
-              <h3 class="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">INFUSION 5.0 &mdash; Internal SIH Hackathon</h3>
+              <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">
+                INFUSION 5.0 &mdash; Internal Smart India Hackathon
+              </h3>
             </div>
             <span class="text-xs font-mono text-slate-500 dark:text-slate-400">September 2026</span>
           </div>
 
           <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Engineered solution for <strong>INFUSION 5.0 &mdash; Internal Smart India Hackathon 2026</strong>, organized by the <strong>ME-RIISE Foundation</strong> at Malnad College of Engineering, Hassan, as part of the official institution-level selection process for the national <strong>Smart India Hackathon 2026 (SIH 2026)</strong> under the Ministry of Education's Innovation Cell (MIC) and AICTE.
+            Collaborative software prototype engineered for <strong>INFUSION 5.0</strong>, the internal institutional qualification sprint for the national <strong>Smart India Hackathon 2026 (SIH 2026)</strong> under the Ministry of Education's Innovation Cell (MIC) and AICTE, hosted by ME-RIISE Foundation at MCE Hassan.
           </p>
 
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-300">
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Smart India Hackathon</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">SIH 2026</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">ME-RIISE Foundation</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">MoE Innovation Cell</span>
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Smart India Hackathon</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">SIH 2026 Selection</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Team Sprint</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">MoE &bull; AICTE</span>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <button type="button" onclick="openLightbox('./cert-sih-infusion.png', 'Certificate of Participation &mdash; INFUSION 5.0 Internal Smart India Hackathon 2026 (SIH 2026)')" class="text-emerald-700 dark:text-emerald-400 hover:text-emerald-900 dark:hover:text-emerald-300 font-medium flex items-center gap-1.5 transition">
-              <i data-lucide="award" class="w-4 h-4"></i>
+          <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-medium">
+            <button type="button" onclick="openLightbox('./cert-sih-infusion.png', 'Certificate of Participation &mdash; INFUSION 5.0 Internal Smart India Hackathon 2026 (SIH 2026)')" class="text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
               <span>View SIH 2026 Certificate</span>
+              <span class="text-[11px]">&rarr;</span>
             </button>
-            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition font-medium">
-              <i data-lucide="github" class="w-4 h-4"></i>
+            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition inline-flex items-center gap-1">
               <span>GitHub</span>
+              <span class="text-[10px]">&nearr;</span>
             </a>
           </div>
         </article>
 
-        <!-- PROJECT 3: GDG Cepheus Hackathon Prototype -->
-        <article class="clean-card p-6 sm:p-8 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+        <!-- PROJECT 3: Cepheus Hackathon Prototype (GDG) -->
+        <article class="editorial-card p-6 sm:p-7 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <span class="text-xs font-mono text-violet-800 dark:text-violet-300 font-semibold px-2.5 py-0.5 rounded-full bg-violet-50 dark:bg-violet-950 border border-violet-200 dark:border-violet-800">
+              <span class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-violet-50 dark:bg-violet-950/80 text-violet-800 dark:text-violet-300 border border-violet-200 dark:border-violet-800">
                 🚀 GDG HACKATHON
               </span>
-              <h3 class="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">Cepheus Hackathon Solution</h3>
+              <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">
+                Cepheus Hackathon Solution &mdash; GDG Atria IT
+              </h3>
             </div>
             <span class="text-xs font-mono text-slate-500 dark:text-slate-400">April 2026</span>
           </div>
 
           <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Collaborative prototype engineered at the "Cepheus" Hackathon, conducted by <strong>Google Developer Groups (GDG) On Campus Atria IT</strong> and Code Club in Bengaluru. Developed under intense hackathon timeframes with API integrations and teamwork.
+            Engineered during the competitive <strong>"Cepheus" Hackathon</strong> organized by <strong>Google Developer Groups (GDG) On Campus Atria IT</strong> and Code Club in Bengaluru. Developed a rapid web solution integrating third-party APIs and real-time state management within stringent sprint limits.
           </p>
 
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-300">
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Google Developer Groups</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Rapid Prototyping</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Team Collaboration</span>
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Google Developer Groups</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Web Application</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">API Integration</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Bengaluru</span>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <button type="button" onclick="openLightbox('./cert-gdg-hackathon.jpg', 'Certificate of Participation &mdash; Cepheus Hackathon (Google Developer Groups Atria IT)')" class="text-violet-700 dark:text-violet-400 hover:text-violet-900 dark:hover:text-violet-300 font-medium flex items-center gap-1.5 transition">
-              <i data-lucide="award" class="w-4 h-4"></i>
+          <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-medium">
+            <button type="button" onclick="openLightbox('./cert-gdg-hackathon.jpg', 'Certificate of Participation &mdash; Cepheus Hackathon (Google Developer Groups Atria IT)')" class="text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
               <span>View GDG Participation Certificate</span>
+              <span class="text-[11px]">&rarr;</span>
             </button>
-            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition font-medium">
-              <i data-lucide="github" class="w-4 h-4"></i>
+            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition inline-flex items-center gap-1">
               <span>GitHub</span>
+              <span class="text-[10px]">&nearr;</span>
             </a>
           </div>
         </article>
 
         <!-- PROJECT 4: TECHNOTSAV 24-Hour Hackathon -->
-        <article class="clean-card p-6 sm:p-8 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
+        <article class="editorial-card p-6 sm:p-7 space-y-4">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="flex items-center gap-2.5">
-              <span class="text-xs font-mono text-sky-800 dark:text-sky-300 font-semibold px-2.5 py-0.5 rounded-full bg-sky-50 dark:bg-sky-950 border border-sky-200 dark:border-sky-800">
+              <span class="text-xs font-mono font-semibold px-2.5 py-0.5 rounded bg-sky-50 dark:bg-sky-950/80 text-sky-800 dark:text-sky-300 border border-sky-200 dark:border-sky-800">
                 ⚡ 24H HACKATHON
               </span>
-              <h3 class="font-heading text-xl sm:text-2xl font-bold text-slate-900 dark:text-white tracking-tight">&quot;TECHNOTSAV&quot; 24-Hour Hackathon</h3>
+              <h3 class="font-heading text-xl font-bold text-slate-900 dark:text-white">
+                "TECHNOTSAV" 24-Hour Hackathon &mdash; IEEE CIS
+              </h3>
             </div>
             <span class="text-xs font-mono text-slate-500 dark:text-slate-400">April 2026</span>
           </div>
 
           <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-            Collaborative prototype engineered at the state-level 24-hour hackathon organized by the <strong>IEEE Computational Intelligence Society (CIS)</strong> SBC in collaboration with the Dept. of CSE (AI&amp;ML) at <strong>Vidyavardhaka College of Engineering (VVCE)</strong>, Mysuru.
+            Collaborative solution built at the state-level 24-hour hackathon hosted by the <strong>IEEE Computational Intelligence Society (CIS)</strong> SBC in collaboration with the Dept. of CSE (AI&amp;ML) at <strong>Vidyavardhaka College of Engineering (VVCE)</strong>, Mysuru. Focused on algorithmic problem-solving and rapid delivery.
           </p>
 
-          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-300">
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">IEEE CIS</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">VVCE Mysuru</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">24-Hour Sprint</span>
-            <span class="px-2.5 py-1 rounded-md bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Rapid Prototyping</span>
+          <div class="flex flex-wrap gap-2 text-xs font-mono text-slate-600 dark:text-slate-400">
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">IEEE Computational Intelligence</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">VVCE Mysuru</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">24-Hour Sprint</span>
+            <span class="px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700">Rapid Prototyping</span>
           </div>
 
-          <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs">
-            <button type="button" onclick="openLightbox('./cert-ieee-technotsav.jpg', 'Certificate of Participation &mdash; 24-Hour Hackathon &quot;TECHNOTSAV&quot; (IEEE CIS &amp; VVCE Mysuru)')" class="text-sky-700 dark:text-sky-400 hover:text-sky-900 dark:hover:text-sky-300 font-medium flex items-center gap-1.5 transition">
-              <i data-lucide="award" class="w-4 h-4"></i>
+          <div class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs font-medium">
+            <button type="button" onclick="openLightbox('./cert-ieee-technotsav.jpg', 'Certificate of Participation &mdash; 24-Hour Hackathon &quot;TECHNOTSAV&quot; (IEEE CIS &amp; VVCE Mysuru)')" class="text-sky-600 dark:text-sky-400 hover:underline inline-flex items-center gap-1">
               <span>View IEEE Participation Certificate</span>
+              <span class="text-[11px]">&rarr;</span>
             </button>
-            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white flex items-center gap-1.5 transition font-medium">
-              <i data-lucide="github" class="w-4 h-4"></i>
+            <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="text-slate-500 hover:text-slate-900 dark:hover:text-white transition inline-flex items-center gap-1">
               <span>GitHub</span>
+              <span class="text-[10px]">&nearr;</span>
             </a>
           </div>
         </article>
 
       </div>
+
     </section>
 
     <!-- ====================================================================
-         VERIFIED CERTIFICATES GALLERY (8 CERTIFICATES)
+         VERIFIED CREDENTIALS GALLERY (8 OFFICIAL CERTIFICATES ARCHIVE)
          ==================================================================== -->
-    <section id="certificates" class="space-y-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">04 / Verified Credentials</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">8 Official Certificates</span>
-      </div>
-
-      <div class="space-y-2">
-        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-          Awards, Expos, Hackathons &amp; Training
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          Click any certificate to expand into a high-resolution lightbox view.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section id="certificates" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs font-mono">
+        <div>
+          <span class="font-semibold uppercase tracking-wider text-slate-500 dark:text-slate-400 block">Verified Credentials Archive</span>
+          <span class="text-slate-400 dark:text-slate-500 text-[11px]">8 Verified Official Scans &bull; Click to inspect full resolution</span>
+        </div>
         
-        <!-- Cert 1: Winner Ignite Idea to Proto 2.0 -->
-        <div class="clean-card p-4 space-y-3 group border-amber-300/80 dark:border-amber-700/60 bg-gradient-to-b from-amber-50/40 via-white to-white dark:from-amber-950/20 dark:via-slate-900 dark:to-slate-900 ring-1 ring-amber-200/50 dark:ring-amber-800/30">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-ignite-winner.jpg', 'Winner &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (AI Chat Bot)')">
-            <img src="./cert-ignite-winner.jpg" alt="Ignite Winner Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-amber-800 dark:text-amber-300 font-semibold bg-amber-100 dark:bg-amber-950 px-2 py-0.5 rounded border border-amber-300 dark:border-amber-800">🏆 EXPO WINNER</span>
-              <span class="text-slate-400 dark:text-slate-500">23 Dec 2025</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">IGNITE: IDEA TO PROTO 2.0 &mdash; Winner</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Awarded <strong>Winner</strong> in the "IGNITE: IDEA TO PROTO 2.0" Project Expo for developing an intelligent <strong>AI Chat Bot</strong>, organized by <strong>ME-RIISE Foundation</strong> and MCE Hassan.
-            </p>
-          </div>
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap items-center gap-1 text-[11px]">
+          <button type="button" data-filter="all" class="cert-filter-btn active px-2.5 py-1 rounded bg-slate-900 dark:bg-sky-500 text-white dark:text-slate-950 font-medium transition">
+            All (8)
+          </button>
+          <button type="button" data-filter="hackathon" class="cert-filter-btn px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            Hackathons (4)
+          </button>
+          <button type="button" data-filter="training" class="cert-filter-btn px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            Training (2)
+          </button>
+          <button type="button" data-filter="research" class="cert-filter-btn px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition">
+            Research (2)
+          </button>
         </div>
-
-        <!-- Cert 2: Smart India Hackathon (SIH 2026) - INFUSION 5.0 -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-sih-infusion.png', 'Certificate of Participation &mdash; INFUSION 5.0 Internal Smart India Hackathon 2026 (SIH 2026)')">
-            <img src="./cert-sih-infusion.png" alt="Smart India Hackathon INFUSION 5.0 Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-emerald-800 dark:text-emerald-300 font-semibold bg-emerald-50 dark:bg-emerald-950 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">🇮🇳 SIH 2026</span>
-              <span class="text-slate-400 dark:text-slate-500">8 Sep 2026</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">INFUSION 5.0 &mdash; Internal SIH 2026</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Organized by <strong>ME-RIISE Foundation</strong> at Malnad College of Engineering, Hassan, as the official institution-level selection for the <strong>Smart India Hackathon 2026</strong> under MoE &amp; AICTE.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 3: TECHNOTSAV 24-Hour Hackathon (IEEE CIS & VVCE) -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-ieee-technotsav.jpg', 'Certificate of Participation &mdash; 24-Hour Hackathon &quot;TECHNOTSAV&quot; (IEEE CIS &amp; VVCE Mysuru)')">
-            <img src="./cert-ieee-technotsav.jpg" alt="IEEE Technotsav 24-Hour Hackathon Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-sky-800 dark:text-sky-300 font-semibold bg-sky-50 dark:bg-sky-950 px-2 py-0.5 rounded border border-sky-200 dark:border-sky-800">⚡ 24H HACKATHON</span>
-              <span class="text-slate-400 dark:text-slate-500">15&ndash;16 Apr 2026</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">&quot;TECHNOTSAV&quot; 24-Hour Hackathon</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              State-level 24-hour hackathon organized by the <strong>IEEE Computational Intelligence Society (CIS)</strong> SBC in collaboration with the Dept. of CSE (AI&amp;ML) at <strong>Vidyavardhaka College of Engineering (VVCE)</strong>, Mysuru.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 4: GDG Cepheus Hackathon -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-gdg-hackathon.jpg', 'Certificate of Participation &mdash; Cepheus Hackathon (Google Developer Groups Atria IT)')">
-            <img src="./cert-gdg-hackathon.jpg" alt="GDG Hackathon Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-violet-800 dark:text-violet-300 font-semibold bg-violet-50 dark:bg-violet-950 px-2 py-0.5 rounded border border-violet-200 dark:border-violet-800">🚀 GDG HACKATHON</span>
-              <span class="text-slate-400 dark:text-slate-500">22&ndash;23 Apr 2026</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">&quot;Cepheus&quot; Hackathon Participation</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Conducted by <strong>Google Developer Groups (GDG) On Campus Atria IT</strong> in collaboration with Code Club, Bengaluru, developing rapid software prototypes under competitive hackathon constraints.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 5: Web Development and GitHub Course (IUCEE EWB-MCE) -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-web-dev.jpg', 'Certificate of Completion &mdash; Web Development &amp; GitHub Course (IUCEE EWB-MCE &amp; MCE Hassan)')">
-            <img src="./cert-web-dev.jpg" alt="IUCEE Web Development and GitHub Course Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-teal-800 dark:text-teal-300 font-semibold bg-teal-50 dark:bg-teal-950 px-2 py-0.5 rounded border border-teal-200 dark:border-teal-800">🌐 WEB &amp; GITHUB</span>
-              <span class="text-slate-400 dark:text-slate-500">25 Oct &ndash; 7 Dec 2025</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">Web Development &amp; GitHub Course</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Certificate of Completion for successfully completing the comprehensive course on <strong>Web Development and GitHub</strong>, organized by <strong>IUCEE EWB-MCE</strong> student chapter at <strong>Malnad College of Engineering, Hassan</strong>.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 6: Java Programming Fundamentals - ExcelR -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-java-excelr.jpg', 'Certificate of Participation &mdash; 30 Hours Java Programming Fundamentals (ExcelR EdTech)')">
-            <img src="./cert-java-excelr.jpg" alt="ExcelR Java Programming Fundamentals Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-indigo-800 dark:text-indigo-300 font-semibold bg-indigo-50 dark:bg-indigo-950 px-2 py-0.5 rounded border border-indigo-200 dark:border-indigo-800">☕ 30-HR LIVE TRAINING</span>
-              <span class="text-slate-400 dark:text-slate-500">Sep &ndash; Oct 2026</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">Java Programming Fundamentals</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Issued by <strong>ExcelR EdTech</strong> (Reg No: 90252/EXCELR/EDL/14102026) for completing 30 hours of intensive live training in core Java, OOP paradigms, algorithms, and application development.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 7: Youth Research Catalyst (ME-RIISE Foundation) -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-research-catalyst.jpg', 'Certificate of Participation &mdash; Youth Research Catalyst (ME-RIISE Foundation &amp; MCE Hassan)')">
-            <img src="./cert-research-catalyst.jpg" alt="Youth Research Catalyst Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-blue-800 dark:text-blue-300 font-semibold bg-blue-50 dark:bg-blue-950 px-2 py-0.5 rounded border border-blue-200 dark:border-blue-800">🔬 RESEARCH CATALYST</span>
-              <span class="text-slate-400 dark:text-slate-500">10 Jun 2026</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">Youth Research Catalyst</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Honored by <strong>ME-RIISE Foundation</strong>, the Department of 1st Year, and R&amp;D Cell at <strong>Malnad College of Engineering, Hassan</strong>, for active participation and demonstrating innovation and problem-solving skills.
-            </p>
-          </div>
-        </div>
-
-        <!-- Cert 8: IGNITE 2.0 Participation -->
-        <div class="clean-card p-4 space-y-3 group bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-          <div class="relative rounded-xl overflow-hidden border border-slate-200 dark:border-slate-700 cursor-pointer shadow-xs aspect-[16/10] bg-slate-50 dark:bg-slate-800" onclick="openLightbox('./cert-ignite-participation.png', 'Certificate of Participation &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (ME-RIISE Foundation)')">
-            <img src="./cert-ignite-participation.png" alt="Ignite Participation Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-300" />
-            <div class="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-xs text-white font-mono font-medium">
-              <span>Click to Zoom &rarr;</span>
-            </div>
-          </div>
-          <div class="space-y-1.5">
-            <div class="flex items-center justify-between text-xs font-mono">
-              <span class="text-slate-800 dark:text-slate-300 font-semibold bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded border border-slate-200 dark:border-slate-700">💡 PROJECT EXPO</span>
-              <span class="text-slate-400 dark:text-slate-500">23 Dec 2025</span>
-            </div>
-            <h4 class="font-heading font-bold text-base text-slate-900 dark:text-white">IGNITE: IDEA TO PROTO 2.0</h4>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-              Official participation credential presented by <strong>ME-RIISE Foundation</strong> and Malnad College of Engineering, Hassan, during the annual prototype showcase exhibition.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         EXPERIENCE & EDUCATION TIMELINE
-         ==================================================================== -->
-    <section id="education" class="space-y-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">05 / Timeline</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">Experience &amp; Academics</span>
       </div>
 
-      <div class="space-y-2">
-        <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
-          Education &amp; Technical Training
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
-          Chronological record of academic foundations, verified coursework, and specialized technical instruction.
-        </p>
-      </div>
-
-      <div class="relative pl-6 sm:pl-8 border-l-2 border-slate-200 dark:border-slate-800 space-y-8">
+      <!-- Credentials Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         
-        <!-- Timeline Item 1: B.E. Computer Science & Engineering -->
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-sky-500 flex items-center justify-center">
-            <div class="w-1.5 h-1.5 rounded-full bg-sky-500"></div>
-          </div>
-
-          <div class="clean-card p-6 sm:p-7 space-y-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                Bachelor of Engineering in Computer Science &amp; Engineering
-              </h3>
-              <span class="text-xs font-mono text-emerald-800 dark:text-emerald-300 bg-emerald-50 dark:bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-200 dark:border-emerald-800 font-medium">
-                2025 &ndash; 2029 &bull; Currently in 3rd Semester
-              </span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <strong class="text-slate-900 dark:text-white">Malnad College of Engineering, Hassan</strong> &bull; Autonomous Institute Affiliated with VTU
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-              Core studies in Data Structures &amp; Applications, Object-Oriented Programming (Java), C Programming &amp; Logic, Web Development &amp; GitHub, Discrete Mathematics, and Computer Organization. Active builder across college innovation cells, hackathon sprints, and student chapters.
-            </p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 2: Java 30-Hour Live Training - ExcelR -->
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-indigo-500 flex items-center justify-center">
-            <div class="w-1.5 h-1.5 rounded-full bg-indigo-500"></div>
-          </div>
-
-          <div class="clean-card p-6 sm:p-7 space-y-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                Java Programming Fundamentals &mdash; 30 Hours Live Training
-              </h3>
-              <span class="text-xs font-mono text-indigo-800 dark:text-indigo-300 bg-indigo-50 dark:bg-indigo-950 px-2.5 py-0.5 rounded border border-indigo-200 dark:border-indigo-800 font-medium">
-                Sep &ndash; Oct 2026
-              </span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <strong class="text-slate-900 dark:text-white">ExcelR EdTech</strong> &bull; Certificate Reg No: 90252/EXCELR/EDL/14102026
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-              Comprehensive live training covering core Java language syntax, Object-Oriented Programming principles (Abstraction, Encapsulation, Inheritance, Polymorphism), method overloading/overriding, memory management, and algorithmic problem-solving.
-            </p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 3: Web Dev & GitHub Course - IUCEE EWB-MCE -->
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-teal-500 flex items-center justify-center">
-            <div class="w-1.5 h-1.5 rounded-full bg-teal-500"></div>
-          </div>
-
-          <div class="clean-card p-6 sm:p-7 space-y-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                Web Development and GitHub Course
-              </h3>
-              <span class="text-xs font-mono text-teal-800 dark:text-teal-300 bg-teal-50 dark:bg-teal-950 px-2.5 py-0.5 rounded border border-teal-200 dark:border-teal-800 font-medium">
-                25 Oct &ndash; 7 Dec 2025
-              </span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <strong class="text-slate-900 dark:text-white">IUCEE EWB-MCE Student Chapter &amp; MCE Hassan</strong>
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-              Hands-on workshop focused on responsive web development, HTML5 semantics, modern CSS styling, Git branch workflows, pull requests, and collaborative code repository management on GitHub.
-            </p>
-          </div>
-        </div>
-
-        <!-- Timeline Item 4: Class X CBSE -->
-        <div class="relative group">
-          <div class="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-white dark:bg-slate-950 border-2 border-slate-400 dark:border-slate-600 flex items-center justify-center">
-            <div class="w-1.5 h-1.5 rounded-full bg-slate-400 dark:bg-slate-600"></div>
-          </div>
-
-          <div class="clean-card p-6 sm:p-7 space-y-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <h3 class="font-heading text-lg sm:text-xl font-bold text-slate-900 dark:text-white">
-                Secondary School Examination (Class X) &mdash; CBSE
-              </h3>
-              <span class="text-xs font-mono text-slate-700 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-2.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 font-medium">
-                Completed 2023
-              </span>
-            </div>
-            <div class="text-xs text-slate-600 dark:text-slate-400 font-medium">
-              <strong class="text-slate-900 dark:text-white">Hassan Public School, Sathyamangala, Hassan</strong> &bull; Central Board of Secondary Education (CBSE)
-            </div>
-            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
-              Completed Class 10 secondary education under the Central Board of Secondary Education (CBSE), establishing strong analytical foundations in Mathematics, Science, Social Science, English Language &amp; Literature, and Kannada.
-            </p>
-          </div>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- ====================================================================
-         CONTACT SECTION
-         ==================================================================== -->
-    <section id="contact" class="space-y-8 pt-6 border-t border-slate-200 dark:border-slate-800">
-      <div class="flex items-baseline justify-between">
-        <span class="text-xs font-mono uppercase tracking-widest text-slate-400 dark:text-slate-500 font-semibold">06 / Contact</span>
-        <span class="text-xs text-slate-500 dark:text-slate-400 font-mono">Get in Touch</span>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        
-        <!-- Left: Contact Details & Quick Links -->
-        <div class="lg:col-span-5 space-y-6">
-          <div class="space-y-3">
-            <h2 class="font-heading text-3xl sm:text-4xl font-bold text-slate-900 dark:text-white tracking-tight">
-              Let's connect and build something impactful.
-            </h2>
-            <p class="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
-              I am open to software engineering internships, collaborative edge AI projects, and technical discussions. Feel free to reach out directly.
-            </p>
-          </div>
-
-          <div class="space-y-3 text-xs font-mono">
-            
-            <!-- Email Box -->
-            <div class="clean-card p-4 flex items-center justify-between gap-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-              <div class="flex items-center gap-3 overflow-hidden">
-                <div class="w-8 h-8 rounded-lg bg-sky-50 dark:bg-sky-950 text-sky-600 dark:text-sky-400 flex items-center justify-center shrink-0">
-                  <i data-lucide="mail" class="w-4 h-4"></i>
-                </div>
-                <div class="truncate">
-                  <span class="text-[10px] text-slate-400 dark:text-slate-500 block">PRIMARY EMAIL</span>
-                  <a href="mailto:js.c.ojaswi01@gmail.com" class="text-slate-900 dark:text-white font-medium hover:underline truncate block">
-                    js.c.ojaswi01@gmail.com
-                  </a>
-                </div>
+        <!-- 1. Winner Ignite 2.0 -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="hackathon">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-ignite-winner.jpg', 'Winner &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (AI Chat Bot)')">
+              <img src="./cert-ignite-winner.jpg" alt="Ignite Winner Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
               </div>
-              <button type="button" class="copy-email-btn px-2.5 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 text-[11px] font-medium transition shrink-0" title="Copy Email">
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-amber-600 dark:text-amber-400 font-semibold">🏆 WINNER</span>
+                <span class="text-slate-400">Dec 2025</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                Ignite 2.0 Expo &mdash; AI Chat Bot
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                ME-RIISE Foundation &bull; MCE Hassan
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-ignite-winner.jpg', 'Winner &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (AI Chat Bot)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 2. SIH 2026 INFUSION 5.0 -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="hackathon">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-sih-infusion.png', 'Certificate of Participation &mdash; INFUSION 5.0 Internal Smart India Hackathon 2026 (SIH 2026)')">
+              <img src="./cert-sih-infusion.png" alt="Smart India Hackathon INFUSION 5.0 Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-emerald-600 dark:text-emerald-400 font-semibold">🇮🇳 SIH 2026</span>
+                <span class="text-slate-400">Sep 2026</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                INFUSION 5.0 &mdash; Internal SIH
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                Ministry of Education Innovation Cell &bull; MCE
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-sih-infusion.png', 'Certificate of Participation &mdash; INFUSION 5.0 Internal Smart India Hackathon 2026 (SIH 2026)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 3. IEEE CIS Technotsav -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="hackathon">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-ieee-technotsav.jpg', 'Certificate of Participation &mdash; 24-Hour Hackathon &quot;TECHNOTSAV&quot; (IEEE CIS &amp; VVCE Mysuru)')">
+              <img src="./cert-ieee-technotsav.jpg" alt="IEEE Technotsav Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-sky-600 dark:text-sky-400 font-semibold">⚡ IEEE CIS</span>
+                <span class="text-slate-400">Apr 2026</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                TECHNOTSAV 24H Hackathon
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                IEEE CIS &bull; VVCE Mysuru
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-ieee-technotsav.jpg', 'Certificate of Participation &mdash; 24-Hour Hackathon &quot;TECHNOTSAV&quot; (IEEE CIS &amp; VVCE Mysuru)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 4. GDG Cepheus Hackathon -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="hackathon">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-gdg-hackathon.jpg', 'Certificate of Participation &mdash; Cepheus Hackathon (Google Developer Groups Atria IT)')">
+              <img src="./cert-gdg-hackathon.jpg" alt="GDG Cepheus Hackathon Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-violet-600 dark:text-violet-400 font-semibold">🚀 GDG</span>
+                <span class="text-slate-400">Apr 2026</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                "Cepheus" Hackathon
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                Google Developer Groups &bull; Atria IT
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-gdg-hackathon.jpg', 'Certificate of Participation &mdash; Cepheus Hackathon (Google Developer Groups Atria IT)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 5. Java Programming Fundamentals - ExcelR -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="training">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-java-excelr.jpg', 'Certificate of Participation &mdash; 30 Hours Java Programming Fundamentals (ExcelR EdTech)')">
+              <img src="./cert-java-excelr.jpg" alt="ExcelR Java Programming Fundamentals Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-indigo-600 dark:text-indigo-400 font-semibold">☕ JAVA 30-HR</span>
+                <span class="text-slate-400">Oct 2026</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                Java Programming Fundamentals
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                ExcelR EdTech &bull; Reg: 90252/EXCELR/EDL/14102026
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-java-excelr.jpg', 'Certificate of Participation &mdash; 30 Hours Java Programming Fundamentals (ExcelR EdTech)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 6. Web Development & GitHub Course - IUCEE -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="training">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-web-dev.jpg', 'Certificate of Completion &mdash; Web Development &amp; GitHub Course (IUCEE EWB-MCE &amp; MCE Hassan)')">
+              <img src="./cert-web-dev.jpg" alt="IUCEE Web Dev and GitHub Course Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-teal-600 dark:text-teal-400 font-semibold">🌐 WEB &bull; GIT</span>
+                <span class="text-slate-400">Dec 2025</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                Web Development &amp; GitHub
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                IUCEE EWB-MCE Student Chapter &bull; MCE Hassan
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-web-dev.jpg', 'Certificate of Completion &mdash; Web Development &amp; GitHub Course (IUCEE EWB-MCE &amp; MCE Hassan)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 7. Youth Research Catalyst -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="research">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-research-catalyst.jpg', 'Certificate of Participation &mdash; Youth Research Catalyst (ME-RIISE Foundation &amp; MCE Hassan)')">
+              <img src="./cert-research-catalyst.jpg" alt="Youth Research Catalyst Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-blue-600 dark:text-blue-400 font-semibold">🔬 RESEARCH</span>
+                <span class="text-slate-400">Jun 2026</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                Youth Research Catalyst
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                ME-RIISE Foundation &bull; R&amp;D Cell MCE Hassan
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-research-catalyst.jpg', 'Certificate of Participation &mdash; Youth Research Catalyst (ME-RIISE Foundation &amp; MCE Hassan)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+        <!-- 8. Ignite 2.0 Participation -->
+        <div class="cert-grid-item editorial-card p-3.5 space-y-3 flex flex-col justify-between" data-category="research">
+          <div class="space-y-2.5">
+            <div class="relative rounded-lg overflow-hidden border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 aspect-[16/11] cursor-pointer group" onclick="openLightbox('./cert-ignite-participation.png', 'Certificate of Participation &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (ME-RIISE Foundation)')">
+              <img src="./cert-ignite-participation.png" alt="Ignite Participation Certificate" class="w-full h-full object-cover object-top group-hover:scale-105 transition duration-200" />
+              <div class="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition text-[11px] text-white font-mono font-medium">
+                <span>Expand Scan &nearr;</span>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-[10px] font-mono pb-1">
+                <span class="text-slate-600 dark:text-slate-400 font-semibold">💡 PROJECT EXPO</span>
+                <span class="text-slate-400">Dec 2025</span>
+              </div>
+              <h4 class="font-heading font-semibold text-xs text-slate-900 dark:text-white leading-snug">
+                Ignite 2.0 Project Expo
+              </h4>
+              <p class="text-[11px] text-slate-500 dark:text-slate-400 pt-1 leading-normal">
+                ME-RIISE Foundation &bull; MCE Hassan
+              </p>
+            </div>
+          </div>
+          <button type="button" onclick="openLightbox('./cert-ignite-participation.png', 'Certificate of Participation &mdash; IGNITE: IDEA TO PROTO 2.0 Project Expo (ME-RIISE Foundation)')" class="text-[11px] font-mono text-sky-600 dark:text-sky-400 hover:underline pt-2 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+            <span>Inspect Scan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         TECHNICAL SKILLS & TOOLING
+         ==================================================================== -->
+    <section id="skills" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span class="font-semibold uppercase tracking-wider">Skills &amp; Capabilities</span>
+        <span>What I Work With</span>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+        
+        <!-- Programming Languages -->
+        <div class="editorial-card p-5 space-y-3">
+          <div class="font-mono font-semibold text-slate-900 dark:text-white uppercase tracking-wider text-[11px]">
+            Languages
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Java (Core &amp; OOP)</span>
+              <span class="font-mono text-[10px] text-indigo-600 dark:text-indigo-400">30h Certified</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">C Programming</span>
+              <span class="font-mono text-[10px] text-slate-400">DSA &bull; Logic</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Python</span>
+              <span class="font-mono text-[10px] text-slate-400">AI &bull; Scripts</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="font-medium text-slate-900 dark:text-white">JavaScript</span>
+              <span class="font-mono text-[10px] text-slate-400">ES6+ &bull; DOM</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Web & Interface -->
+        <div class="editorial-card p-5 space-y-3">
+          <div class="font-mono font-semibold text-slate-900 dark:text-white uppercase tracking-wider text-[11px]">
+            Web &amp; Frontend
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">HTML5 &amp; CSS3</span>
+              <span class="font-mono text-[10px] text-teal-600 dark:text-teal-400">IUCEE Cert</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Tailwind CSS</span>
+              <span class="font-mono text-[10px] text-slate-400">Utility UI</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Responsive Design</span>
+              <span class="font-mono text-[10px] text-slate-400">Mobile-First</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="font-medium text-slate-900 dark:text-white">REST APIs</span>
+              <span class="font-mono text-[10px] text-slate-400">JSON Endpoints</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Computer Science Core -->
+        <div class="editorial-card p-5 space-y-3">
+          <div class="font-mono font-semibold text-slate-900 dark:text-white uppercase tracking-wider text-[11px]">
+            Computer Science
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Data Structures</span>
+              <span class="font-mono text-[10px] text-slate-400">Stacks, Trees, etc.</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Algorithms (DSA)</span>
+              <span class="font-mono text-[10px] text-slate-400">Complexity</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">OOP Principles</span>
+              <span class="font-mono text-[10px] text-slate-400">Inheritance, Poly</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="font-medium text-slate-900 dark:text-white">Problem Solving</span>
+              <span class="font-mono text-[10px] text-slate-400">Algorithmic</span>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Tools & Developer Workflow -->
+        <div class="editorial-card p-5 space-y-3">
+          <div class="font-mono font-semibold text-slate-900 dark:text-white uppercase tracking-wider text-[11px]">
+            Tooling &amp; Workflow
+          </div>
+          <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Git &amp; GitHub</span>
+              <span class="font-mono text-[10px] text-teal-600 dark:text-teal-400">Workflows</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">VS Code &bull; IntelliJ</span>
+              <span class="font-mono text-[10px] text-slate-400">Primary IDEs</span>
+            </li>
+            <li class="flex items-center justify-between pb-1.5 border-b border-slate-100 dark:border-slate-800">
+              <span class="font-medium text-slate-900 dark:text-white">Linux CLI / Bash</span>
+              <span class="font-mono text-[10px] text-slate-400">Terminal</span>
+            </li>
+            <li class="flex items-center justify-between">
+              <span class="font-medium text-slate-900 dark:text-white">GitHub Pages CI/CD</span>
+              <span class="font-mono text-[10px] text-slate-400">Automated</span>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         ACADEMIC BACKGROUND & TIMELINE
+         ==================================================================== -->
+    <section id="timeline" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span class="font-semibold uppercase tracking-wider">Education &amp; Chronology</span>
+        <span>Academic Journey</span>
+      </div>
+
+      <div class="space-y-4">
+        
+        <!-- 1. B.E. Computer Science -->
+        <div class="editorial-card p-5 sm:p-6 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1 text-xs font-mono">
+            <span class="font-semibold text-slate-900 dark:text-white">B.E. in Computer Science &amp; Engineering</span>
+            <span class="text-slate-500 dark:text-slate-400">2025 &ndash; 2029 &bull; Currently in 3rd Semester</span>
+          </div>
+          <div class="text-xs text-sky-600 dark:text-sky-400 font-medium font-mono">
+            Malnad College of Engineering, Hassan (Autonomous, Affiliated to VTU)
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+            Pursuing core undergraduate degree covering Data Structures &amp; Applications, Object-Oriented Programming with Java, C Programming &amp; Logic Design, Discrete Mathematics, and Computer Organization. Active member across collegiate project expos and hackathon sprints.
+          </p>
+        </div>
+
+        <!-- 2. Java 30-Hour Live Training -->
+        <div class="editorial-card p-5 sm:p-6 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1 text-xs font-mono">
+            <span class="font-semibold text-slate-900 dark:text-white">Java Programming Fundamentals (30 Hours Live)</span>
+            <span class="text-slate-500 dark:text-slate-400">Sep &ndash; Oct 2026</span>
+          </div>
+          <div class="text-xs text-indigo-600 dark:text-indigo-400 font-medium font-mono">
+            ExcelR EdTech &bull; Reg: 90252/EXCELR/EDL/14102026
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+            Intensive live training program covering Object-Oriented Programming (encapsulation, abstraction, inheritance, polymorphism), method overriding, exception handling, data structures implementation, and memory models.
+          </p>
+        </div>
+
+        <!-- 3. Web Dev & GitHub Course -->
+        <div class="editorial-card p-5 sm:p-6 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1 text-xs font-mono">
+            <span class="font-semibold text-slate-900 dark:text-white">Web Development &amp; GitHub Course</span>
+            <span class="text-slate-500 dark:text-slate-400">Oct &ndash; Dec 2025</span>
+          </div>
+          <div class="text-xs text-teal-600 dark:text-teal-400 font-medium font-mono">
+            IUCEE EWB-MCE Student Chapter &bull; MCE Hassan
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+            Coursework in responsive web page construction, semantic HTML5, modern CSS layouts, Git branching, pull requests, and collaborative repository workflows.
+          </p>
+        </div>
+
+        <!-- 4. Class X CBSE -->
+        <div class="editorial-card p-5 sm:p-6 space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-1 text-xs font-mono">
+            <span class="font-semibold text-slate-900 dark:text-white">Secondary School Examination (Class X) &mdash; CBSE</span>
+            <span class="text-slate-500 dark:text-slate-400">Completed 2023</span>
+          </div>
+          <div class="text-xs text-slate-500 dark:text-slate-400 font-medium font-mono">
+            Hassan Public School, Sathyamangala, Hassan
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pt-1">
+            Completed secondary schooling under the Central Board of Secondary Education (CBSE), establishing quantitative and scientific foundations.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ====================================================================
+         CONTACT SECTION: CONCISE, DIRECT & FUNCTIONAL
+         ==================================================================== -->
+    <section id="contact" class="space-y-6 pt-6 border-t border-slate-200 dark:border-slate-800">
+      
+      <div class="flex items-center justify-between text-xs font-mono text-slate-500 dark:text-slate-400">
+        <span class="font-semibold uppercase tracking-wider">Get in Touch</span>
+        <span>Communication</span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
+        
+        <div class="md:col-span-5 space-y-4">
+          <h2 class="font-heading text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white tracking-tight">
+            Let's connect.
+          </h2>
+          <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+            I'm currently looking for software engineering internship opportunities and hackathon collaborations. Whether you have a question or just want to say hi, my inbox is open.
+          </p>
+
+          <div class="space-y-2.5 pt-2 text-xs font-mono">
+            <!-- Email Item -->
+            <div class="editorial-card p-3.5 flex items-center justify-between gap-3">
+              <div class="truncate">
+                <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Direct Email</span>
+                <a href="mailto:js.c.ojaswi01@gmail.com" class="text-slate-900 dark:text-white hover:underline truncate block font-medium">
+                  js.c.ojaswi01@gmail.com
+                </a>
+              </div>
+              <button type="button" class="copy-email-btn px-2.5 py-1 rounded bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white border border-slate-200 dark:border-slate-700 text-[11px] font-mono transition shrink-0" title="Copy email address">
                 Copy
               </button>
             </div>
 
-            <!-- Location Box -->
-            <div class="clean-card p-4 flex items-center gap-3 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800">
-              <div class="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                <i data-lucide="map-pin" class="w-4 h-4"></i>
-              </div>
-              <div>
-                <span class="text-[10px] text-slate-400 dark:text-slate-500 block">LOCATION</span>
-                <span class="text-slate-900 dark:text-white font-medium">Hassan, Karnataka, India</span>
-              </div>
+            <!-- Location Item -->
+            <div class="editorial-card p-3.5">
+              <span class="text-[10px] text-slate-400 uppercase tracking-wider block">Location</span>
+              <span class="text-slate-900 dark:text-white font-medium block">Hassan, Karnataka, India</span>
             </div>
 
-            <!-- Social Links Grid -->
-            <div class="grid grid-cols-2 gap-3">
-              <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="clean-card p-3 flex items-center gap-2.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border-slate-200 dark:border-slate-800 transition">
-                <svg class="w-4 h-4 fill-current text-slate-800 dark:text-white shrink-0" viewBox="0 0 24 24" aria-hidden="true">
+            <!-- Social Links -->
+            <div class="grid grid-cols-2 gap-2.5 pt-1">
+              <a href="https://github.com/js-chinmayaojaswi" target="_blank" rel="noopener noreferrer" class="editorial-card p-3 flex items-center gap-2 hover:border-slate-400 dark:hover:border-slate-600 transition">
+                <svg class="w-4 h-4 fill-current text-slate-800 dark:text-slate-200 shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"></path>
                 </svg>
-                <div class="truncate">
-                  <span class="text-[9px] text-slate-400 dark:text-slate-500 block">CODE</span>
-                  <span class="text-xs text-slate-900 dark:text-white font-medium">GitHub Profile</span>
-                </div>
+                <span class="text-xs text-slate-800 dark:text-slate-200 font-medium">GitHub Profile</span>
               </a>
 
-              <a href="https://www.linkedin.com/in/j-s-chinmaya-ojaswi-103889364" target="_blank" rel="noopener noreferrer" class="clean-card p-3 flex items-center gap-2.5 bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800/80 border-slate-200 dark:border-slate-800 transition">
+              <a href="https://www.linkedin.com/in/j-s-chinmaya-ojaswi-103889364" target="_blank" rel="noopener noreferrer" class="editorial-card p-3 flex items-center gap-2 hover:border-slate-400 dark:hover:border-slate-600 transition">
                 <svg class="w-4 h-4 fill-current text-[#0a66c2] dark:text-[#38bdf8] shrink-0" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 8.76a1.53 1.53 0 0 0 1.54-1.54A1.53 1.53 0 0 0 6.46 5.7a1.54 1.54 0 0 0-1.54 1.52c0 .85.7 1.54 1.54 1.54M7.83 18.5v-8.37H5.08v8.37h2.75z"></path>
                 </svg>
-                <div class="truncate">
-                  <span class="text-[9px] text-slate-400 dark:text-slate-500 block">NETWORK</span>
-                  <span class="text-xs text-slate-900 dark:text-white font-medium">LinkedIn Profile</span>
-                </div>
+                <span class="text-xs text-slate-800 dark:text-slate-200 font-medium">LinkedIn Profile</span>
               </a>
             </div>
-
           </div>
         </div>
 
-        <!-- Right: Interactive Minimal Contact Form -->
-        <div class="lg:col-span-7">
-          <form id="contact-form" class="clean-card p-6 sm:p-8 space-y-4 bg-white dark:bg-slate-900 border-slate-200 dark:border-slate-800 shadow-sm">
+        <!-- Direct Contact Form -->
+        <div class="md:col-span-7">
+          <form id="contact-form" class="editorial-card p-6 space-y-4">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div class="space-y-1.5">
-                <label for="contact-name" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Your Name</label>
-                <input type="text" id="contact-name" required placeholder="e.g. Alex Sharma" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 transition" />
+              <div class="space-y-1">
+                <label for="contact-name" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Name</label>
+                <input type="text" id="contact-name" required placeholder="Your Name" class="w-full px-3 py-2 rounded-lg border text-xs transition" />
               </div>
 
-              <div class="space-y-1.5">
-                <label for="contact-email" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Your Email</label>
-                <input type="email" id="contact-email" required placeholder="alex@company.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 transition" />
+              <div class="space-y-1">
+                <label for="contact-email" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Email</label>
+                <input type="email" id="contact-email" required placeholder="your.email@example.com" class="w-full px-3 py-2 rounded-lg border text-xs transition" />
               </div>
             </div>
 
-            <div class="space-y-1.5">
-              <label for="contact-message" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Message / Opportunity</label>
-              <textarea id="contact-message" rows="4" required placeholder="Hi Chinmaya, we came across your portfolio and hackathon projects and would love to discuss..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 dark:placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-sky-500/40 transition"></textarea>
+            <div class="space-y-1">
+              <label for="contact-message" class="block text-xs font-mono font-medium text-slate-700 dark:text-slate-300">Message</label>
+              <textarea id="contact-message" rows="4" required placeholder="Hi Chinmaya, I wanted to reach out regarding..." class="w-full px-3 py-2 rounded-lg border text-xs transition"></textarea>
             </div>
 
-            <div class="pt-2 flex items-center justify-between">
-              <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">
-                Direct dispatch to <code class="text-slate-700 dark:text-slate-300 font-semibold">js.c.ojaswi01@gmail.com</code>
+            <div class="pt-1 flex items-center justify-between">
+              <span class="text-[11px] font-mono text-slate-400">
+                Dispatches to <span class="font-medium text-slate-600 dark:text-slate-400">js.c.ojaswi01@gmail.com</span>
               </span>
-              <button type="submit" class="px-5 py-2.5 rounded-xl bg-slate-900 dark:bg-sky-500 hover:bg-slate-800 dark:hover:bg-sky-400 text-white dark:text-slate-950 font-medium text-xs tracking-tight transition flex items-center gap-2">
+              <button type="submit" class="px-4 py-2 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-950 font-medium text-xs hover:bg-slate-800 dark:hover:bg-slate-100 transition inline-flex items-center gap-1.5">
                 <span>Send Message</span>
-                <i data-lucide="send" class="w-3.5 h-3.5"></i>
+                <span>&rarr;</span>
               </button>
             </div>
           </form>
         </div>
 
       </div>
+
     </section>
 
   </main>
 
   <!-- ======================================================================
-       FOOTER
+       FOOTER: AUTHENTIC, QUIET SIGNATURE
        ====================================================================== -->
-  <footer class="mt-auto border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-[#090d16] py-12 transition-colors duration-250">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-slate-500 dark:text-slate-400">
+  <footer class="mt-20 border-t border-slate-200 dark:border-slate-800 py-10 transition-colors duration-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 dark:text-slate-400">
       
-      <div class="flex items-center gap-3">
-        <img src="./profile.jpg" alt="Chinmaya Ojaswi" class="w-7 h-7 rounded-lg object-cover object-top border border-slate-200 dark:border-slate-700" />
-        <div>
-          <span class="font-heading font-bold text-slate-900 dark:text-white block">J S Chinmaya Ojaswi</span>
-          <span class="text-[11px] text-slate-400 dark:text-slate-500 font-mono">CSE &bull; Malnad College of Engineering, Hassan</span>
-        </div>
+      <div class="flex items-center gap-2.5">
+        <img src="./profile.jpg" alt="Chinmaya Ojaswi" class="w-6 h-6 rounded-full object-cover object-top border border-slate-300 dark:border-slate-700" />
+        <span class="font-heading font-medium text-slate-900 dark:text-white">J S Chinmaya Ojaswi</span>
+        <span>&bull;</span>
+        <span class="font-mono text-[11px]" id="local-time-indicator">Hassan, Karnataka</span>
       </div>
 
-      <div class="flex flex-wrap items-center justify-center gap-6 text-xs font-mono">
+      <div class="flex items-center gap-4 text-xs font-mono">
         <a href="#about" class="hover:text-slate-900 dark:hover:text-white transition">About</a>
-        <a href="#skills" class="hover:text-slate-900 dark:hover:text-white transition">Skills</a>
         <a href="#projects" class="hover:text-slate-900 dark:hover:text-white transition">Projects</a>
-        <a href="#certificates" class="hover:text-slate-900 dark:hover:text-white transition">Certificates (8)</a>
+        <a href="#certificates" class="hover:text-slate-900 dark:hover:text-white transition">Credentials</a>
         <a href="#contact" class="hover:text-slate-900 dark:hover:text-white transition">Contact</a>
       </div>
 
-      <div class="text-[11px] font-mono text-center sm:text-right">
-        <span>&copy; <span id="year-span">2026</span> J S Chinmaya Ojaswi.</span>
-        <span class="block text-slate-400 dark:text-slate-600 text-[10px]">Deployed via GitHub Pages</span>
+      <div class="text-[11px] font-mono text-center sm:text-right text-slate-400">
+        <span>&copy; <span id="year-span">2026</span> &bull; Hosted on GitHub Pages</span>
       </div>
 
     </div>
   </footer>
 
   <!-- ======================================================================
-       FLOATING BACK-TO-TOP BUTTON
+       FLOATING BACK TO TOP BUTTON
        ====================================================================== -->
-  <button id="back-to-top-btn" type="button" aria-label="Back to Top" class="fixed bottom-6 right-6 z-30 p-2.5 rounded-full bg-slate-900 dark:bg-sky-500 text-white dark:text-slate-950 shadow-md hover:scale-105 transition-all duration-300 opacity-0 pointer-events-none translate-y-4 focus:outline-none">
-    <i data-lucide="chevron-up" class="w-5 h-5"></i>
+  <button id="back-to-top-btn" type="button" aria-label="Back to top" class="fixed bottom-6 right-6 z-30 p-2 rounded-full bg-slate-900 dark:bg-white text-white dark:text-slate-900 shadow-md transition-all duration-200 opacity-0 pointer-events-none translate-y-4">
+    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"></path>
+    </svg>
   </button>
 
   <!-- ======================================================================
-       INTERACTIVE LIGHTBOX MODAL
+       FULL RESOLUTION CREDENTIAL LIGHTBOX MODAL
        ====================================================================== -->
-  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-8 lightbox-backdrop animate-fadeIn" role="dialog" aria-modal="true">
-    <div class="relative max-w-4xl w-full bg-white dark:bg-slate-900 rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col max-h-[92vh]">
+  <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center p-4 sm:p-6 lightbox-backdrop animate-fadeIn" role="dialog" aria-modal="true" aria-label="Credential Preview">
+    <div class="relative max-w-4xl w-full bg-white dark:bg-[#111723] rounded-xl overflow-hidden border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col max-h-[92vh]">
       
-      <!-- Lightbox Header -->
-      <div class="flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900/90 text-xs">
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-4 py-3 border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#171f30] text-xs">
         <div id="lightbox-caption" class="font-heading font-semibold text-slate-900 dark:text-white truncate pr-4 text-xs sm:text-sm">
-          Document Preview
+          Verified Credential Scan
         </div>
-        <button type="button" onclick="closeLightbox()" class="p-1.5 rounded-lg text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition" aria-label="Close modal">
-          <i data-lucide="x" class="w-4 h-4"></i>
+        <button type="button" onclick="closeLightbox()" class="p-1 rounded-md text-slate-500 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white hover:bg-slate-200 dark:hover:bg-slate-800 transition" aria-label="Close modal">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
         </button>
       </div>
 
-      <!-- Lightbox Image Content -->
-      <div class="p-3 sm:p-6 flex-1 overflow-auto flex items-center justify-center bg-slate-100/50 dark:bg-slate-950/50">
-        <img id="lightbox-img" src="" alt="Verified Document Scan" class="max-h-[70vh] w-auto max-w-full rounded-lg object-contain shadow-sm border border-slate-200 dark:border-slate-800" />
+      <!-- Modal Image View -->
+      <div class="p-4 sm:p-6 flex-1 overflow-auto flex items-center justify-center bg-slate-100/40 dark:bg-slate-950/40">
+        <img id="lightbox-img" src="" alt="Verified Document Scan" class="max-h-[72vh] w-auto max-w-full rounded object-contain shadow-xs border border-slate-200 dark:border-slate-800" />
       </div>
 
-      <!-- Lightbox Footer -->
-      <div class="px-5 py-3 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-900 text-right text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center justify-between">
-        <span>Verified Credential</span>
-        <button type="button" onclick="closeLightbox()" class="px-3 py-1 rounded-md bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 transition">
+      <!-- Modal Footer -->
+      <div class="px-4 py-2.5 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-[#171f30] text-[11px] font-mono text-slate-500 flex items-center justify-between">
+        <span>Verified Official Document</span>
+        <button type="button" onclick="closeLightbox()" class="px-2.5 py-1 rounded bg-slate-200 dark:bg-slate-800 text-slate-800 dark:text-slate-200 hover:bg-slate-300 dark:hover:bg-slate-700 transition">
           Close (Esc)
         </button>
       </div>
@@ -1193,12 +1075,14 @@
   <!-- ======================================================================
        TOAST NOTIFICATION COMPONENT
        ====================================================================== -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 hidden items-center gap-2.5 px-4 py-2.5 rounded-xl bg-slate-900 dark:bg-slate-100 text-white dark:text-slate-950 text-xs font-mono shadow-lg border border-slate-800 dark:border-slate-200 transition-all">
-    <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-400 dark:text-emerald-600 shrink-0"></i>
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-50 hidden items-center gap-2 px-3.5 py-2 rounded-lg bg-slate-900 dark:bg-white text-white dark:text-slate-950 text-xs font-mono shadow-lg border border-slate-800 dark:border-slate-200 transition-all">
+    <svg class="w-4 h-4 text-emerald-400 dark:text-emerald-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+    </svg>
     <span id="toast-msg">Email copied to clipboard!</span>
   </div>
 
-  <!-- Client-Side Scripts -->
+  <!-- Client-Side Runtime Script -->
   <script src="./script.js"></script>
 </body>
 </html>

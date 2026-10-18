@@ -6,19 +6,22 @@ A fast, lightweight, and modern developer portfolio website built with a **Clean
 
 ## 🎯 Design Philosophy & Highlights
 
-- **Dual-Theme Architecture (Dark & Light):**
-  - **Dark Mode:** Deep charcoal/slate palette (`#090d16`), dark card surfaces (`#0f172a`), subtle hairline borders, crisp white text, and electric blue/cyan accents (`#38bdf8`).
-  - **Light Mode:** Off-white/pearl palette (`#f8fafc`), clean white cards, dark charcoal text (`#0f172a`), and consistent blue accents (`#0284c7`).
-  - **Zero-FOUC:** Pre-render inline script prevents theme flicker on reload.
-  - **Auto-Sync:** Persists user selection in `localStorage` and respects OS system preferences (`prefers-color-scheme`).
-- **Recruiter-Ready Technical Showcase:**
-  - Highlights authentic engineering projects and hackathons: AI Chat Bot (🏆 Ignite 2.0 Winner), INFUSION 5.0 (SIH 2026), Cepheus GDG Hackathon, and IEEE Technotsav 24h Hackathon.
-- **Interactive Document Lightbox:** Full-resolution modal viewer for all 8 verified credentials and certificates.
-- **Pure Client-Side Vanilla Stack:** Built with pure HTML5, Tailwind CSS (CDN with `darkMode: 'class'`), custom CSS (`style.css`), vanilla JavaScript (`script.js`), and Lucide icons.
-- **Zero Build Steps:** No Node.js, Webpack, or npm required. Open `index.html` in any browser or double-click to view immediately.
-- **One-Click Email Copy & Direct Mail Form:** Instant clipboard copy for `js.c.ojaswi01@gmail.com` with toast feedback, plus pre-filled email client dispatch.
-- **Automated CI/CD Deployment:** GitHub Pages static deployment configured via `.github/workflows/static.yml`.
-- **Fully Responsive:** Looks sharp across mobile, tablet, and widescreen desktop monitors.
+- **Human-Crafted Editorial Architecture:**
+  - Designed from the ground up to feel authentic, intentional, and senior-developed — free of generic AI website builder tropes (no excessive gradient halos, neon blur discs, pulsing radar animations, or repetitive card grids).
+  - Clean typography using **Plus Jakarta Sans**, **Inter**, and **JetBrains Mono** with purposeful optical hierarchy and balanced whitespace.
+- **Dual-Theme Design (Dark & Light):**
+  - **Dark Mode:** Deep midnight slate palette (`#0b0f17`), subtle 1px border lines (`#1c2638`), and crisp white typography with electric sky accents (`#38bdf8`).
+  - **Light Mode:** Warm editorial paper palette (`#f8fafc`), clean white surfaces, and rich slate typography with deep blue accents (`#0284c7`).
+  - **Zero-FOUC:** Pre-render inline script eliminates flash of incorrect theme on load and synchronizes with `localStorage` and OS preferences.
+- **Interactive Verified Credentials Archive:**
+  - Categorized archive of all 8 verified credentials with interactive category filter tabs (`All`, `Hackathons`, `Training`, `Research`) and full-resolution lightbox viewer.
+- **Recruiter-Ready Projects:**
+  - Case-study presentation of authentic engineering builds: AI Chat Bot (🏆 Ignite 2.0 Expo Winner), INFUSION 5.0 (SIH 2026 Selection), Cepheus Hackathon (GDG Atria IT), and TECHNOTSAV 24H Hackathon (IEEE CIS).
+- **Human Micro-Interactions:**
+  - Live Hassan, India local time indicator (`Asia/Kolkata` IST timezone).
+  - One-click email copy with toast feedback.
+  - Accessible focus states, keyboard ESC navigation for modals, and responsive layout across mobile, tablet, and widescreen.
+- **Zero Build Tooling:** Pure semantic HTML5, Tailwind Play CDN with class-based dark mode, custom CSS, and vanilla JS. Instant deployment on GitHub Pages.
 
 ---
 

@@ -1,34 +1,21 @@
 // ==========================================================================
-// Clean Minimal Modern Developer Portfolio - Interactive Logic
-// Theme: Bulletproof Dark & Light Mode Switcher + Recruiter-Ready UX
-// J S Chinmaya Ojaswi - CSE @ Malnad College of Engineering, Hassan
+// J S Chinmaya Ojaswi — Personal Developer Portfolio
+// Human-Crafted Interactive Logic (Vanilla JS, Zero Dependencies)
 // ==========================================================================
 
 const CHINMAYA_EMAIL = 'js.c.ojaswi01@gmail.com';
 const THEME_KEY = 'portfolio-theme';
 
 // --------------------------------------------------------------------------
-// Core Theme Functions (Callable anytime)
+// Theme Management (Synchronous & Reactive)
 // --------------------------------------------------------------------------
 function getActiveTheme() {
   const saved = localStorage.getItem(THEME_KEY);
   if (saved === 'dark' || saved === 'light') return saved;
-  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 }
 
-function applyTheme(themeName) {
-  const isDark = themeName === 'dark';
-  const html = document.documentElement;
-
-  if (isDark) {
-    html.classList.add('dark');
-  } else {
-    html.classList.remove('dark');
-  }
-
-  localStorage.setItem(THEME_KEY, themeName);
-
-  // Sync all theme icons and text across desktop & mobile
+function updateThemeUI(isDark) {
   const sunIcons = document.querySelectorAll('.theme-sun-icon');
   const moonIcons = document.querySelectorAll('.theme-moon-icon');
   const themeLabels = document.querySelectorAll('.theme-label-text');
@@ -58,24 +45,42 @@ function applyTheme(themeName) {
   });
 }
 
+function applyTheme(themeName) {
+  const isDark = themeName === 'dark';
+  const html = document.documentElement;
+
+  if (isDark) {
+    html.classList.add('dark');
+  } else {
+    html.classList.remove('dark');
+  }
+
+  try {
+    localStorage.setItem(THEME_KEY, themeName);
+  } catch (e) {}
+
+  updateThemeUI(isDark);
+}
+
 function toggleTheme() {
   const current = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
   const next = current === 'dark' ? 'light' : 'dark';
   applyTheme(next);
 }
 
-// Expose globally for inline event handlers
+// Expose globally for inline button handlers
 window.getActiveTheme = getActiveTheme;
 window.applyTheme = applyTheme;
 window.toggleTheme = toggleTheme;
+window.updateThemeUI = updateThemeUI;
 
 // --------------------------------------------------------------------------
 // Page Initialization on DOMContentLoaded
 // --------------------------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Theme Switcher State
-  const initialTheme = getActiveTheme();
-  applyTheme(initialTheme);
+  // 1. Sync theme UI
+  const currentIsDark = document.documentElement.classList.contains('dark');
+  updateThemeUI(currentIsDark);
 
   // 2. Attach Click Listeners to Theme Toggle Buttons
   const toggleBtn = document.getElementById('theme-toggle-btn');
@@ -94,15 +99,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Listen for OS system theme changes (if user hasn't chosen manually)
-  window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-    if (!localStorage.getItem(THEME_KEY)) {
-      applyTheme(e.matches ? 'dark' : 'light');
-    }
-  });
-
-  // 3. Initialize Lucide Icons
-  renderIcons();
+  // 3. Listen for OS theme changes
+  if (window.matchMedia) {
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+      if (!localStorage.getItem(THEME_KEY)) {
+        applyTheme(e.matches ? 'dark' : 'light');
+      }
+    });
+  }
 
   // 4. Set current year in footer
   const yearSpan = document.getElementById('year-span');
@@ -110,32 +114,55 @@ document.addEventListener('DOMContentLoaded', () => {
     yearSpan.textContent = new Date().getFullYear();
   }
 
-  // 5. Initialize Mobile Menu Drawer
+  // 5. Initialize live time indicator (Hassan, India • IST)
+  initLiveTime();
+
+  // 6. Initialize Mobile Menu Drawer
   initMobileMenu();
 
-  // 6. Initialize Clipboard Email Buttons
+  // 7. Initialize Clipboard Email Buttons
   initCopyEmailButtons();
 
-  // 7. Initialize Lightbox
+  // 8. Initialize Lightbox Modal
   initLightbox();
 
-  // 8. Header scroll styling & back-to-top button
+  // 9. Initialize Certificate Category Filter
+  initCertificateFilters();
+
+  // 10. Header scroll styling & back-to-top button
   initScrollWatchers();
 
-  // 9. Contact form handler
+  // 11. Contact form handler
   initContactForm();
 
-  // 10. Resume button handler
+  // 12. Resume button handler
   initResumeButtons();
 });
 
 // --------------------------------------------------------------------------
-// Helper: Lucide Icons refresh
+// Live Hassan, India Time Indicator (IST: UTC+5:30)
 // --------------------------------------------------------------------------
-function renderIcons() {
-  if (window.lucide && typeof window.lucide.createIcons === 'function') {
-    window.lucide.createIcons();
+function initLiveTime() {
+  const timeEl = document.getElementById('local-time-indicator');
+  if (!timeEl) return;
+
+  function update() {
+    try {
+      const now = new Date();
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      };
+      timeEl.textContent = new Intl.DateTimeFormat('en-US', options).format(now) + ' IST';
+    } catch (e) {
+      timeEl.textContent = 'IST (UTC+5:30)';
+    }
   }
+
+  update();
+  setInterval(update, 30000);
 }
 
 // --------------------------------------------------------------------------
@@ -152,7 +179,6 @@ function initMobileMenu() {
     menu.classList.toggle('hidden');
   });
 
-  // Close menu when clicking any mobile anchor
   const mobileLinks = menu.querySelectorAll('.mobile-link');
   mobileLinks.forEach(link => {
     link.addEventListener('click', () => {
@@ -160,7 +186,6 @@ function initMobileMenu() {
     });
   });
 
-  // Close when clicking outside
   document.addEventListener('click', (e) => {
     if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !toggleBtn.contains(e.target)) {
       menu.classList.add('hidden');
@@ -169,7 +194,7 @@ function initMobileMenu() {
 }
 
 // --------------------------------------------------------------------------
-// Copy Email to Clipboard with Toast Notification
+// Copy Email to Clipboard with Sleek Toast Feedback
 // --------------------------------------------------------------------------
 function initCopyEmailButtons() {
   const copyButtons = document.querySelectorAll('.copy-email-btn');
@@ -185,7 +210,7 @@ function initCopyEmailButtons() {
 function copyEmailToClipboard() {
   if (navigator.clipboard && window.isSecureContext) {
     navigator.clipboard.writeText(CHINMAYA_EMAIL)
-      .then(() => showToast('Email copied: ' + CHINMAYA_EMAIL))
+      .then(() => showToast('Copied: ' + CHINMAYA_EMAIL))
       .catch(() => fallbackCopyText(CHINMAYA_EMAIL));
   } else {
     fallbackCopyText(CHINMAYA_EMAIL);
@@ -205,12 +230,12 @@ function fallbackCopyText(text) {
     const successful = document.execCommand('copy');
     document.body.removeChild(textArea);
     if (successful) {
-      showToast('Email copied: ' + text);
+      showToast('Copied: ' + text);
     } else {
-      showToast('Email address: ' + text);
+      showToast(text);
     }
   } catch (err) {
-    showToast('Email address: ' + text);
+    showToast(text);
   }
 }
 
@@ -228,11 +253,46 @@ function showToast(message) {
   toastTimer = setTimeout(() => {
     toast.classList.add('hidden');
     toast.classList.remove('flex');
-  }, 2800);
+  }, 2600);
 }
 
 // --------------------------------------------------------------------------
-// Lightbox Modal for Full-Resolution Image Inspection
+// Certificate Category Filter Tabs
+// --------------------------------------------------------------------------
+function initCertificateFilters() {
+  const filterBtns = document.querySelectorAll('.cert-filter-btn');
+  const certItems = document.querySelectorAll('.cert-grid-item');
+
+  if (!filterBtns.length || !certItems.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const category = btn.getAttribute('data-filter') || 'all';
+
+      // Update active button state
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-slate-900', 'text-white', 'dark:bg-sky-500', 'dark:text-slate-950');
+        b.classList.add('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-400');
+      });
+
+      btn.classList.add('active', 'bg-slate-900', 'text-white', 'dark:bg-sky-500', 'dark:text-slate-950');
+      btn.classList.remove('bg-slate-100', 'text-slate-600', 'dark:bg-slate-800', 'dark:text-slate-400');
+
+      // Filter grid items
+      certItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category') || '';
+        if (category === 'all' || itemCategory === category) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    });
+  });
+}
+
+// --------------------------------------------------------------------------
+// Lightbox Modal for Full-Resolution Document Inspection
 // --------------------------------------------------------------------------
 function initLightbox() {
   const lightbox = document.getElementById('lightbox');
@@ -259,13 +319,11 @@ window.openLightbox = function(src, caption) {
   if (!lightbox || !img) return;
 
   img.src = src;
-  if (cap) cap.innerHTML = caption || '';
+  if (cap) cap.innerHTML = caption || 'Verified Credential Scan';
 
   lightbox.classList.remove('hidden');
   lightbox.classList.add('flex');
   document.body.classList.add('overflow-hidden');
-
-  renderIcons();
 };
 
 window.closeLightbox = function() {
@@ -281,7 +339,7 @@ window.closeLightbox = function() {
 };
 
 // --------------------------------------------------------------------------
-// Scroll Watchers: Header Shadow & Floating Back to Top Button
+// Scroll Watchers: Header border styling & Back to Top button
 // --------------------------------------------------------------------------
 function initScrollWatchers() {
   const header = document.querySelector('header');
@@ -292,9 +350,9 @@ function initScrollWatchers() {
 
     if (header) {
       if (scrollY > 20) {
-        header.classList.add('shadow-sm', 'backdrop-blur-md');
+        header.classList.add('shadow-xs');
       } else {
-        header.classList.remove('shadow-sm', 'backdrop-blur-md');
+        header.classList.remove('shadow-xs');
       }
     }
 
@@ -334,15 +392,15 @@ function initContactForm() {
     const message = messageInput ? messageInput.value.trim() : '';
 
     if (!name || !email || !message) {
-      showToast('Please fill out all fields.');
+      showToast('Please complete all form fields.');
       return;
     }
 
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-    const body = encodeURIComponent(`Hi Chinmaya,\n\n${message}\n\nBest regards,\n${name}\n${email}`);
+    const subject = encodeURIComponent(`Message from ${name} via Portfolio`);
+    const body = encodeURIComponent(`Hi Chinmaya,\n\n${message}\n\nFrom: ${name} (${email})`);
     window.location.href = `mailto:${CHINMAYA_EMAIL}?subject=${subject}&body=${body}`;
 
-    showToast('Opening your email client to send message...');
+    showToast('Opening email client to send message...');
     form.reset();
   });
 }
@@ -359,9 +417,9 @@ function initResumeButtons() {
           if (!res.ok) {
             e.preventDefault();
             const subject = encodeURIComponent('Resume Request — J S Chinmaya Ojaswi');
-            const body = encodeURIComponent('Hi Chinmaya,\n\nI reviewed your portfolio and would like to request a copy of your latest resume for upcoming opportunities.\n\nBest regards,');
+            const body = encodeURIComponent('Hi Chinmaya,\n\nI visited your portfolio and would like to request your latest resume.\n\nBest regards,');
             window.location.href = `mailto:${CHINMAYA_EMAIL}?subject=${subject}&body=${body}`;
-            showToast('Opening email to request latest resume PDF directly!');
+            showToast('Opening email to request resume directly.');
           }
         })
         .catch(() => {});
