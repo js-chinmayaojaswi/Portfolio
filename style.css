@@ -205,6 +205,11 @@ html:not(.dark) textarea:focus {
   -webkit-backdrop-filter: blur(12px);
 }
 
+/* Utility to guarantee hidden display across themes and components */
+.hidden {
+  display: none !important;
+}
+
 /* Animations */
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.98); }
